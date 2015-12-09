@@ -1,7 +1,8 @@
 # UIView+CameraBackground
 Show camera layer as a background to any UIView.
 
-## * Both **front and back** camera supported.
+## Features
+* Both **front and back** camera supported.
 * **Flash** modes: auto, on, off.
 * Countdown **timer**.
 * Tap to **focus**.
