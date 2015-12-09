@@ -8,10 +8,6 @@
 
 import UIKit
 
-func trace(msg: String) {
-    print(msg)
-}
-
 class CameraBackgroundViewController: UIViewController {
     
     override func viewDidLoad() {

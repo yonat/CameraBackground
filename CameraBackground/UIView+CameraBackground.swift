@@ -434,10 +434,10 @@ private extension AVCaptureSession {
         do {
             let deviceInput = try AVCaptureDeviceInput(device: device)
             if canAddInput(deviceInput) { addInput(deviceInput) }
-            else { trace("Can't add camera input for position \(position.rawValue)") }
+            else { NSLog("Can't add camera input for position \(position.rawValue)") }
         }
         catch {
-            trace("Can't access camera")
+            NSLog("Can't access camera")
         }
     }
 }
@@ -505,7 +505,7 @@ private extension AVCaptureDevice {
             unlockForConfiguration()
         } catch let error1 as NSError {
             error = error1
-            trace("Failed to acquire AVCaptureDevice.lockForConfiguration: \(error?.localizedDescription)")
+            NSLog("Failed to acquire AVCaptureDevice.lockForConfiguration: \(error?.localizedDescription)")
         }
     }
 }
