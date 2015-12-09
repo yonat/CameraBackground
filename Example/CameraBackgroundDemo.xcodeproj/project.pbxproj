@@ -1,0 +1,318 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		DCAA697D1C1862D6009E2A55 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DCAA697B1C1862D6009E2A55 /* LaunchScreen.storyboard */; };
+		DCAA69851C186320009E2A55 /* CameraBackgroundDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCAA69841C186320009E2A55 /* CameraBackgroundDemo.swift */; };
+		DCAA69901C18635B009E2A55 /* camera-flash@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DCAA69871C18635B009E2A55 /* camera-flash@2x.png */; };
+		DCAA69911C18635B009E2A55 /* camera-switch@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DCAA69881C18635B009E2A55 /* camera-switch@2x.png */; };
+		DCAA69921C18635B009E2A55 /* camera-timer@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DCAA69891C18635B009E2A55 /* camera-timer@2x.png */; };
+		DCAA69931C18635B009E2A55 /* MiniDispatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCAA698A1C18635B009E2A55 /* MiniDispatch.swift */; };
+		DCAA69941C18635B009E2A55 /* MiniLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCAA698B1C18635B009E2A55 /* MiniLayout.swift */; };
+		DCAA69951C18635B009E2A55 /* record.png in Resources */ = {isa = PBXBuildFile; fileRef = DCAA698C1C18635B009E2A55 /* record.png */; };
+		DCAA69971C18635B009E2A55 /* ToggleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCAA698E1C18635B009E2A55 /* ToggleButton.swift */; };
+		DCAA69981C18635B009E2A55 /* UIView+CameraBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCAA698F1C18635B009E2A55 /* UIView+CameraBackground.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		DCAA696F1C1862D6009E2A55 /* CameraBackgroundDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CameraBackgroundDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		DCAA697C1C1862D6009E2A55 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		DCAA697E1C1862D6009E2A55 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DCAA69841C186320009E2A55 /* CameraBackgroundDemo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraBackgroundDemo.swift; sourceTree = "<group>"; };
+		DCAA69871C18635B009E2A55 /* camera-flash@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "camera-flash@2x.png"; sourceTree = "<group>"; };
+		DCAA69881C18635B009E2A55 /* camera-switch@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "camera-switch@2x.png"; sourceTree = "<group>"; };
+		DCAA69891C18635B009E2A55 /* camera-timer@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "camera-timer@2x.png"; sourceTree = "<group>"; };
+		DCAA698A1C18635B009E2A55 /* MiniDispatch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MiniDispatch.swift; sourceTree = "<group>"; };
+		DCAA698B1C18635B009E2A55 /* MiniLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MiniLayout.swift; sourceTree = "<group>"; };
+		DCAA698C1C18635B009E2A55 /* record.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = record.png; sourceTree = "<group>"; };
+		DCAA698E1C18635B009E2A55 /* ToggleButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToggleButton.swift; sourceTree = "<group>"; };
+		DCAA698F1C18635B009E2A55 /* UIView+CameraBackground.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+CameraBackground.swift"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		DCAA696C1C1862D6009E2A55 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		DCAA69661C1862D6009E2A55 = {
+			isa = PBXGroup;
+			children = (
+				DCAA69861C18635B009E2A55 /* CameraBackground */,
+				DCAA69711C1862D6009E2A55 /* CameraBackgroundDemo */,
+				DCAA69701C1862D6009E2A55 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		DCAA69701C1862D6009E2A55 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				DCAA696F1C1862D6009E2A55 /* CameraBackgroundDemo.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		DCAA69711C1862D6009E2A55 /* CameraBackgroundDemo */ = {
+			isa = PBXGroup;
+			children = (
+				DCAA69841C186320009E2A55 /* CameraBackgroundDemo.swift */,
+				DCAA697B1C1862D6009E2A55 /* LaunchScreen.storyboard */,
+				DCAA697E1C1862D6009E2A55 /* Info.plist */,
+			);
+			path = CameraBackgroundDemo;
+			sourceTree = "<group>";
+		};
+		DCAA69861C18635B009E2A55 /* CameraBackground */ = {
+			isa = PBXGroup;
+			children = (
+				DCAA698F1C18635B009E2A55 /* UIView+CameraBackground.swift */,
+				DCAA698B1C18635B009E2A55 /* MiniLayout.swift */,
+				DCAA698A1C18635B009E2A55 /* MiniDispatch.swift */,
+				DCAA698E1C18635B009E2A55 /* ToggleButton.swift */,
+				DCAA69871C18635B009E2A55 /* camera-flash@2x.png */,
+				DCAA69881C18635B009E2A55 /* camera-switch@2x.png */,
+				DCAA69891C18635B009E2A55 /* camera-timer@2x.png */,
+				DCAA698C1C18635B009E2A55 /* record.png */,
+			);
+			name = CameraBackground;
+			path = ../CameraBackground;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		DCAA696E1C1862D6009E2A55 /* CameraBackgroundDemo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DCAA69811C1862D6009E2A55 /* Build configuration list for PBXNativeTarget "CameraBackgroundDemo" */;
+			buildPhases = (
+				DCAA696B1C1862D6009E2A55 /* Sources */,
+				DCAA696C1C1862D6009E2A55 /* Frameworks */,
+				DCAA696D1C1862D6009E2A55 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = CameraBackgroundDemo;
+			productName = CameraBackgroundDemo;
+			productReference = DCAA696F1C1862D6009E2A55 /* CameraBackgroundDemo.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		DCAA69671C1862D6009E2A55 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0720;
+				LastUpgradeCheck = 0720;
+				ORGANIZATIONNAME = "Yonat Sharon";
+				TargetAttributes = {
+					DCAA696E1C1862D6009E2A55 = {
+						CreatedOnToolsVersion = 7.2;
+					};
+				};
+			};
+			buildConfigurationList = DCAA696A1C1862D6009E2A55 /* Build configuration list for PBXProject "CameraBackgroundDemo" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = DCAA69661C1862D6009E2A55;
+			productRefGroup = DCAA69701C1862D6009E2A55 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				DCAA696E1C1862D6009E2A55 /* CameraBackgroundDemo */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		DCAA696D1C1862D6009E2A55 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DCAA69951C18635B009E2A55 /* record.png in Resources */,
+				DCAA69901C18635B009E2A55 /* camera-flash@2x.png in Resources */,
+				DCAA69911C18635B009E2A55 /* camera-switch@2x.png in Resources */,
+				DCAA697D1C1862D6009E2A55 /* LaunchScreen.storyboard in Resources */,
+				DCAA69921C18635B009E2A55 /* camera-timer@2x.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		DCAA696B1C1862D6009E2A55 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DCAA69931C18635B009E2A55 /* MiniDispatch.swift in Sources */,
+				DCAA69851C186320009E2A55 /* CameraBackgroundDemo.swift in Sources */,
+				DCAA69941C18635B009E2A55 /* MiniLayout.swift in Sources */,
+				DCAA69971C18635B009E2A55 /* ToggleButton.swift in Sources */,
+				DCAA69981C18635B009E2A55 /* UIView+CameraBackground.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		DCAA697B1C1862D6009E2A55 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DCAA697C1C1862D6009E2A55 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		DCAA697F1C1862D6009E2A55 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		DCAA69801C1862D6009E2A55 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		DCAA69821C1862D6009E2A55 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				INFOPLIST_FILE = CameraBackgroundDemo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.roysharon.CameraBackgroundDemo;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		DCAA69831C1862D6009E2A55 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				INFOPLIST_FILE = CameraBackgroundDemo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.roysharon.CameraBackgroundDemo;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		DCAA696A1C1862D6009E2A55 /* Build configuration list for PBXProject "CameraBackgroundDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DCAA697F1C1862D6009E2A55 /* Debug */,
+				DCAA69801C1862D6009E2A55 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DCAA69811C1862D6009E2A55 /* Build configuration list for PBXNativeTarget "CameraBackgroundDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DCAA69821C1862D6009E2A55 /* Debug */,
+				DCAA69831C1862D6009E2A55 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = DCAA69671C1862D6009E2A55 /* Project object */;
+}
