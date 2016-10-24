@@ -30,3 +30,5 @@ view.takeCameraSnapshot( {
 // ...
 view.removeCameraBackground()
 ```
+
+Remeber to add `NSCameraUsageDescription` to your `Info.plist`.
