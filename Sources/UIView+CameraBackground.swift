@@ -8,8 +8,11 @@
 
 import AVFoundation
 import UIKit
+import MiniLayout
+import MiniDispatch
+import MultiToggleButton
 
-extension UIView {
+public extension UIView {
     // MARK: - Public Camera Interface
 
     func toggleCameraBackground(position: AVCaptureDevicePosition = .Unspecified, buttonMargins: UIEdgeInsets = UIEdgeInsetsZero) {
@@ -27,7 +30,7 @@ extension UIView {
     }
 
     func addCameraBackground(position: AVCaptureDevicePosition = .Unspecified, buttonMargins: UIEdgeInsets = UIEdgeInsetsZero) {
-        let session = AVCaptureSession.stillCamreaCaptureSession(position)
+        let session = AVCaptureSession.stillCameraCaptureSession(position)
         let cameraLayer = AVCaptureVideoPreviewLayer(session: session)
         if session == nil {
             cameraLayer.backgroundColor = UIColor.blackColor().CGColor
@@ -81,11 +84,11 @@ extension UIView {
         constrain(panel, at: .Right, diff: -margins.right)
         
         // timer button
-        let timerButton = ToggleButton(image: UIImage.template("camera-timer"), states: ["", "3s", "10s"], colors: [nil, UIColor.cameraOnColor(), UIColor.cameraOnColor(), UIColor.cameraOnColor()])
+        let timerButton = ToggleButton(image: bundeledCameraTemplateImage("camera-timer"), states: ["", "3s", "10s"], colors: [nil, UIColor.cameraOnColor(), UIColor.cameraOnColor(), UIColor.cameraOnColor()])
         panel.addTaggedSubview(timerButton, tag: theTimerButtonTag, constrain: .Top, .CenterX, .Bottom) // .Bottom constraint sets panel height
         
         // flash button
-        let flashButton = ToggleButton(image: UIImage.template("camera-flash"), states: ["Off", "On", "Auto"], colors: [nil, UIColor.cameraOnColor()]) { (sender) -> () in
+        let flashButton = ToggleButton(image: bundeledCameraTemplateImage("camera-flash"), states: ["Off", "On", "Auto"], colors: [nil, UIColor.cameraOnColor()]) { (sender) -> () in
             self.setFlashMode(sender.currentStateIndex)
         }
         panel.addTaggedSubview(flashButton, tag: theFlashButtonTag, constrain: .Top, .Left)
@@ -93,15 +96,15 @@ extension UIView {
         
         // switch camera button
         if AVCaptureDevice.devicesWithMediaType(AVMediaTypeVideo).count > 1 || UIDevice.isSimulator {
-            let cameraButton = UIButton.buttonWithImage(UIImage.template("camera-switch")!, target: self, action: "switchCamera:")
+            let cameraButton = UIButton.buttonWithImage(bundeledCameraTemplateImage("camera-switch")!, target: self, action: #selector(switchCamera(_:)))
             panel.addTaggedSubview(cameraButton, tag: theSwitchButtonTag, constrain: .Top, .Right)
         }
         
         // focus and zoom gestures - uses gesture subclass to make it identifiable when removing camera
-        addGestureRecognizer( CameraPinchGestureRecognizer(target: self, action: "pinchToZoom:") )
-        addGestureRecognizer( CameraTapGestureRecognizer(target: self, action: "tapToFocus:") )
+        addGestureRecognizer( CameraPinchGestureRecognizer(target: self, action: #selector(pinchToZoom(_:))) )
+        addGestureRecognizer( CameraTapGestureRecognizer(target: self, action: #selector(tapToFocus(_:))) )
         device?.changeMonitoring(true)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "removeFocusBox", name: AVCaptureDeviceSubjectAreaDidChangeNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(removeFocusBox), name: AVCaptureDeviceSubjectAreaDidChangeNotification, object: nil)
     }
     
     private func removeCameraControls() {
@@ -271,6 +274,23 @@ private let theFocusLayerName = "focusSquare"
 
 // MARK: - Useful Extensions
 
+public extension UITraitEnvironment {
+    public func bundledCameraImage(named: String) -> UIImage? {
+        if let image = UIImage(named: named) {
+            return image
+        }
+        let podBundle = NSBundle(forClass: FocusBoxLayer.self)
+        if let url = podBundle.URLForResource("CameraBackground", withExtension: "bundle") {
+            return UIImage(named: named, inBundle: NSBundle(URL: url), compatibleWithTraitCollection: traitCollection)
+        }
+        return nil
+    }
+
+    public func bundeledCameraTemplateImage(named: String) -> UIImage? {
+        return bundledCameraImage(named)?.imageWithRenderingMode(.AlwaysTemplate)
+    }
+}
+
 extension UIDevice {
     class var isSimulator: Bool {
         return currentDevice().model.hasSuffix("Simulator")
@@ -322,12 +342,6 @@ extension CALayer {
         if let name = name {
             layer.name = name
         }
-    }
-}
-
-extension UIImage {
-    class func template(template: String) -> UIImage? {
-        return UIImage(named: template)?.imageWithRenderingMode(.AlwaysTemplate)
     }
 }
 
@@ -415,7 +429,7 @@ private extension UIColor {
 }
 
 private extension AVCaptureSession {
-    class func stillCamreaCaptureSession(position: AVCaptureDevicePosition) -> AVCaptureSession? {
+    class func stillCameraCaptureSession(position: AVCaptureDevicePosition) -> AVCaptureSession? {
         if UIDevice.isSimulator {return nil}
         let session = AVCaptureSession()
         session.sessionPreset = AVCaptureSessionPresetPhoto

@@ -7,31 +7,19 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C888C167E824ECCD77F8227B /* Pods_CameraBackgroundDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E029DBC166098BA3A5037840 /* Pods_CameraBackgroundDemo.framework */; };
 		DCAA697D1C1862D6009E2A55 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DCAA697B1C1862D6009E2A55 /* LaunchScreen.storyboard */; };
 		DCAA69851C186320009E2A55 /* CameraBackgroundDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCAA69841C186320009E2A55 /* CameraBackgroundDemo.swift */; };
-		DCAA69901C18635B009E2A55 /* camera-flash@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DCAA69871C18635B009E2A55 /* camera-flash@2x.png */; };
-		DCAA69911C18635B009E2A55 /* camera-switch@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DCAA69881C18635B009E2A55 /* camera-switch@2x.png */; };
-		DCAA69921C18635B009E2A55 /* camera-timer@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DCAA69891C18635B009E2A55 /* camera-timer@2x.png */; };
-		DCAA69931C18635B009E2A55 /* MiniDispatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCAA698A1C18635B009E2A55 /* MiniDispatch.swift */; };
-		DCAA69941C18635B009E2A55 /* MiniLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCAA698B1C18635B009E2A55 /* MiniLayout.swift */; };
-		DCAA69951C18635B009E2A55 /* record.png in Resources */ = {isa = PBXBuildFile; fileRef = DCAA698C1C18635B009E2A55 /* record.png */; };
-		DCAA69971C18635B009E2A55 /* ToggleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCAA698E1C18635B009E2A55 /* ToggleButton.swift */; };
-		DCAA69981C18635B009E2A55 /* UIView+CameraBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCAA698F1C18635B009E2A55 /* UIView+CameraBackground.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		A2BC9F5B565F462453644626 /* Pods-CameraBackgroundDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CameraBackgroundDemo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CameraBackgroundDemo/Pods-CameraBackgroundDemo.debug.xcconfig"; sourceTree = "<group>"; };
 		DCAA696F1C1862D6009E2A55 /* CameraBackgroundDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CameraBackgroundDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DCAA697C1C1862D6009E2A55 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		DCAA697E1C1862D6009E2A55 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DCAA69841C186320009E2A55 /* CameraBackgroundDemo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraBackgroundDemo.swift; sourceTree = "<group>"; };
-		DCAA69871C18635B009E2A55 /* camera-flash@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "camera-flash@2x.png"; sourceTree = "<group>"; };
-		DCAA69881C18635B009E2A55 /* camera-switch@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "camera-switch@2x.png"; sourceTree = "<group>"; };
-		DCAA69891C18635B009E2A55 /* camera-timer@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "camera-timer@2x.png"; sourceTree = "<group>"; };
-		DCAA698A1C18635B009E2A55 /* MiniDispatch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MiniDispatch.swift; sourceTree = "<group>"; };
-		DCAA698B1C18635B009E2A55 /* MiniLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MiniLayout.swift; sourceTree = "<group>"; };
-		DCAA698C1C18635B009E2A55 /* record.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = record.png; sourceTree = "<group>"; };
-		DCAA698E1C18635B009E2A55 /* ToggleButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToggleButton.swift; sourceTree = "<group>"; };
-		DCAA698F1C18635B009E2A55 /* UIView+CameraBackground.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+CameraBackground.swift"; sourceTree = "<group>"; };
+		E029DBC166098BA3A5037840 /* Pods_CameraBackgroundDemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CameraBackgroundDemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E563FE72183E153B2EFBB9DA /* Pods-CameraBackgroundDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CameraBackgroundDemo.release.xcconfig"; path = "Pods/Target Support Files/Pods-CameraBackgroundDemo/Pods-CameraBackgroundDemo.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -39,18 +27,37 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C888C167E824ECCD77F8227B /* Pods_CameraBackgroundDemo.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		56D65DC6DA6D581592C47947 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				E029DBC166098BA3A5037840 /* Pods_CameraBackgroundDemo.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		832A0356AFFDD2D150B4D514 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				A2BC9F5B565F462453644626 /* Pods-CameraBackgroundDemo.debug.xcconfig */,
+				E563FE72183E153B2EFBB9DA /* Pods-CameraBackgroundDemo.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		DCAA69661C1862D6009E2A55 = {
 			isa = PBXGroup;
 			children = (
-				DCAA69861C18635B009E2A55 /* CameraBackground */,
 				DCAA69711C1862D6009E2A55 /* CameraBackgroundDemo */,
 				DCAA69701C1862D6009E2A55 /* Products */,
+				832A0356AFFDD2D150B4D514 /* Pods */,
+				56D65DC6DA6D581592C47947 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -72,22 +79,6 @@
 			path = CameraBackgroundDemo;
 			sourceTree = "<group>";
 		};
-		DCAA69861C18635B009E2A55 /* CameraBackground */ = {
-			isa = PBXGroup;
-			children = (
-				DCAA698F1C18635B009E2A55 /* UIView+CameraBackground.swift */,
-				DCAA698B1C18635B009E2A55 /* MiniLayout.swift */,
-				DCAA698A1C18635B009E2A55 /* MiniDispatch.swift */,
-				DCAA698E1C18635B009E2A55 /* ToggleButton.swift */,
-				DCAA69871C18635B009E2A55 /* camera-flash@2x.png */,
-				DCAA69881C18635B009E2A55 /* camera-switch@2x.png */,
-				DCAA69891C18635B009E2A55 /* camera-timer@2x.png */,
-				DCAA698C1C18635B009E2A55 /* record.png */,
-			);
-			name = CameraBackground;
-			path = ../CameraBackground;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -95,9 +86,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = DCAA69811C1862D6009E2A55 /* Build configuration list for PBXNativeTarget "CameraBackgroundDemo" */;
 			buildPhases = (
+				1095C87B413EEDAFF02F1C90 /* [CP] Check Pods Manifest.lock */,
 				DCAA696B1C1862D6009E2A55 /* Sources */,
 				DCAA696C1C1862D6009E2A55 /* Frameworks */,
 				DCAA696D1C1862D6009E2A55 /* Resources */,
+				886033E7B38F738E8B67EDFF /* [CP] Embed Pods Frameworks */,
+				1D2A79308DF152298580BA35 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -120,6 +114,7 @@
 				TargetAttributes = {
 					DCAA696E1C1862D6009E2A55 = {
 						CreatedOnToolsVersion = 7.2;
+						DevelopmentTeam = UT7SLSWEUX;
 					};
 				};
 			};
@@ -146,26 +141,66 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DCAA69951C18635B009E2A55 /* record.png in Resources */,
-				DCAA69901C18635B009E2A55 /* camera-flash@2x.png in Resources */,
-				DCAA69911C18635B009E2A55 /* camera-switch@2x.png in Resources */,
 				DCAA697D1C1862D6009E2A55 /* LaunchScreen.storyboard in Resources */,
-				DCAA69921C18635B009E2A55 /* camera-timer@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		1095C87B413EEDAFF02F1C90 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		1D2A79308DF152298580BA35 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CameraBackgroundDemo/Pods-CameraBackgroundDemo-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		886033E7B38F738E8B67EDFF /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CameraBackgroundDemo/Pods-CameraBackgroundDemo-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		DCAA696B1C1862D6009E2A55 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DCAA69931C18635B009E2A55 /* MiniDispatch.swift in Sources */,
 				DCAA69851C186320009E2A55 /* CameraBackgroundDemo.swift in Sources */,
-				DCAA69941C18635B009E2A55 /* MiniLayout.swift in Sources */,
-				DCAA69971C18635B009E2A55 /* ToggleButton.swift in Sources */,
-				DCAA69981C18635B009E2A55 /* UIView+CameraBackground.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -268,26 +303,32 @@
 		};
 		DCAA69821C1862D6009E2A55 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A2BC9F5B565F462453644626 /* Pods-CameraBackgroundDemo.debug.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
+				DEVELOPMENT_TEAM = UT7SLSWEUX;
 				INFOPLIST_FILE = CameraBackgroundDemo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.roysharon.CameraBackgroundDemo;
+				PRODUCT_BUNDLE_IDENTIFIER = com.roysharon.CameraBackground;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 2.3;
 			};
 			name = Debug;
 		};
 		DCAA69831C1862D6009E2A55 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E563FE72183E153B2EFBB9DA /* Pods-CameraBackgroundDemo.release.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
+				DEVELOPMENT_TEAM = UT7SLSWEUX;
 				INFOPLIST_FILE = CameraBackgroundDemo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.roysharon.CameraBackgroundDemo;
+				PRODUCT_BUNDLE_IDENTIFIER = com.roysharon.CameraBackground;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 2.3;
 			};
 			name = Release;
 		};

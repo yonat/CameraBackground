@@ -7,13 +7,15 @@
 //
 
 import UIKit
+import CameraBackground
+import MiniLayout
 
 class CameraBackgroundViewController: UIViewController {
     
     override func viewDidLoad() {
         let shootButton = UIButton(type: .Custom)
-        shootButton.setImage(UIImage(named: "record")?.imageWithRenderingMode(.AlwaysTemplate), forState: .Normal)
-        shootButton.addTarget(self, action: "shoot", forControlEvents: .TouchUpInside)
+        shootButton.setImage( bundeledCameraTemplateImage("record"), forState: .Normal)
+        shootButton.addTarget(self, action: #selector(shoot), forControlEvents: .TouchUpInside)
         shootButton.tag = 7
 
         view.layoutMargins = UIEdgeInsets(top: 30, left: 10, bottom: 10, right: 10)

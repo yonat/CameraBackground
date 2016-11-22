@@ -1,0 +1,6 @@
+use_frameworks!
+pod 'CameraBackground', :path => '..'
+pod 'MiniLayout'
+
+target 'CameraBackgroundDemo' do
+end

@@ -2,7 +2,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "CameraBackground"
-  s.version      = "1.0.1"
+  s.version      = "1.0.2"
   s.summary      = "Show camera layer as a background to any UIView."
 
   s.description  = <<-DESC
@@ -43,11 +43,16 @@ view.removeCameraBackground()
   s.social_media_url   = "http://twitter.com/yonatsharon"
 
   s.platform     = :ios, "8.0"
+  s.requires_arc = true
 
   s.source       = { :git => "https://github.com/yonat/CameraBackground.git", :tag => s.version }
 
-  s.source_files  = "CameraBackground/*"
+  s.source_files  = "Sources/*.swift"
+  s.subspec 'Resources' do |resources|
+    resources.resource_bundle = {s.name => 'Sources/*.png'}
+  end
 
-  s.requires_arc = true
-
+  s.dependency 'MiniLayout'
+  s.dependency 'MiniDispatch'
+  s.dependency 'MultiToggleButton'
 end
