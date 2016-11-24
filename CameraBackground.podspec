@@ -2,7 +2,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "CameraBackground"
-  s.version      = "1.0.2"
+  s.version      = "1.1.0"
   s.summary      = "Show camera layer as a background to any UIView."
 
   s.description  = <<-DESC
@@ -53,6 +53,5 @@ view.removeCameraBackground()
   end
 
   s.dependency 'MiniLayout'
-  s.dependency 'MiniDispatch'
   s.dependency 'MultiToggleButton'
 end

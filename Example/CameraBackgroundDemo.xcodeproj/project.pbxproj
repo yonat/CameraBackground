@@ -115,6 +115,7 @@
 					DCAA696E1C1862D6009E2A55 = {
 						CreatedOnToolsVersion = 7.2;
 						DevelopmentTeam = UT7SLSWEUX;
+						LastSwiftMigration = 0810;
 					};
 				};
 			};
@@ -313,7 +314,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.roysharon.CameraBackground;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 2.3;
+				SWIFT_VERSION = 3.0.1;
 			};
 			name = Debug;
 		};
@@ -328,7 +329,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.roysharon.CameraBackground;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 2.3;
+				SWIFT_VERSION = 3.0.1;
 			};
 			name = Release;
 		};

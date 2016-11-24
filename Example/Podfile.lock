@@ -1,16 +1,13 @@
 PODS:
-  - CameraBackground (1.0.1):
-    - CameraBackground/Resources (= 1.0.1)
-    - MiniDispatch
+  - CameraBackground (1.0.2):
+    - CameraBackground/Resources (= 1.0.2)
     - MiniLayout
     - MultiToggleButton
-  - CameraBackground/Resources (1.0.1):
-    - MiniDispatch
+  - CameraBackground/Resources (1.0.2):
     - MiniLayout
     - MultiToggleButton
-  - MiniDispatch (1.0.2)
-  - MiniLayout (1.0.1)
-  - MultiToggleButton (1.4.0)
+  - MiniLayout (1.1.0)
+  - MultiToggleButton (1.5.0)
 
 DEPENDENCIES:
   - CameraBackground (from `..`)
@@ -21,10 +18,9 @@ EXTERNAL SOURCES:
     :path: ..
 
 SPEC CHECKSUMS:
-  CameraBackground: a988a9220c171b52e892a21c58d62e0cbd7e7d52
-  MiniDispatch: 1176fb873416b5e8cdf330ac0079b98ba960a2eb
-  MiniLayout: 764eae77dd3aff551a293f9c06b1b2d72783cd74
-  MultiToggleButton: 89d20c0303f50642a2cbf683bd8e56a2f3ce2331
+  CameraBackground: 9cdcc3b70c47c288932ad607170fec5a4729c4af
+  MiniLayout: 7664ed112a89d954e6ccb83b6ef5dc122fb77852
+  MultiToggleButton: 0505f6a83d415617d6cff1e1c7ca5f82d6a8fcee
 
 PODFILE CHECKSUM: 8e7485b2027f23e092324c319932ba5da990cd54
 

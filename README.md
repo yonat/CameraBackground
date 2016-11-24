@@ -20,7 +20,7 @@ view.addCameraBackground()
 view.takeCameraSnapshot( {
       // animate snapshot capture
       self.view.alpha = 0
-      UIView.animateWithDuration(1) { self.view.alpha = 1 }
+      UIView.animate(withDuration: 1) { self.view.alpha = 1 }
   },
   completion: { (capturedImage, error) -> () in
       self.view.freeCameraSnapshot() // unfreeze image
@@ -31,4 +31,22 @@ view.takeCameraSnapshot( {
 view.removeCameraBackground()
 ```
 
-Remeber to add `NSCameraUsageDescription` to your `Info.plist`.
+**Important:** Remeber to add `NSCameraUsageDescription` to your `Info.plist`.
+
+## Installation
+
+### CocoaPods:
+
+```ruby
+pod 'CameraBackground'
+```
+
+For legacy Swift 2.3:
+
+```ruby
+pod 'CameraBackground', '~> 1.0.2'
+```
+
+### Manually:
+
+Copy `Sources/*` to your Xcode project.
