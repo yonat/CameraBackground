@@ -1,13 +1,13 @@
 PODS:
-  - CameraBackground (1.0.2):
-    - CameraBackground/Resources (= 1.0.2)
+  - CameraBackground (1.1.1):
+    - CameraBackground/Resources (= 1.1.1)
     - MiniLayout
     - MultiToggleButton
-  - CameraBackground/Resources (1.0.2):
+  - CameraBackground/Resources (1.1.1):
     - MiniLayout
     - MultiToggleButton
   - MiniLayout (1.1.0)
-  - MultiToggleButton (1.5.0)
+  - MultiToggleButton (1.5.1)
 
 DEPENDENCIES:
   - CameraBackground (from `..`)
@@ -18,10 +18,10 @@ EXTERNAL SOURCES:
     :path: ..
 
 SPEC CHECKSUMS:
-  CameraBackground: 9cdcc3b70c47c288932ad607170fec5a4729c4af
+  CameraBackground: 43314c3ea1e849b4d9abaadaacab7fe1ff2370ac
   MiniLayout: 7664ed112a89d954e6ccb83b6ef5dc122fb77852
-  MultiToggleButton: 0505f6a83d415617d6cff1e1c7ca5f82d6a8fcee
+  MultiToggleButton: 95205f3ddd509adaf0c1f030066041be94e4d351
 
-PODFILE CHECKSUM: 8e7485b2027f23e092324c319932ba5da990cd54
+PODFILE CHECKSUM: ca059db8f2a3d01654bfa95229fa8d062fc3379c
 
 COCOAPODS: 1.1.1

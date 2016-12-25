@@ -50,6 +50,7 @@ public extension UIView {
     ///   - completion: handle captured image.
     public func takeCameraSnapshot(_ onTime: (() -> Void)?, completion: ((_ capturedImage: UIImage?, _ error: NSError?) -> ())? = nil) {
         if let cameraLayer = cameraLayer {
+            viewWithTag(theCountdownLabelTag)?.removeFromSuperview()
             performWithTimer(timerInterval) {
                 onTime?()
                 cameraLayer.connection.isEnabled = false // to freeze image
@@ -123,6 +124,7 @@ public extension UIView {
 
         // remove controls
         viewWithTag(thePanelViewTag)?.removeFromSuperview()
+        viewWithTag(theCountdownLabelTag)?.removeFromSuperview()
     }
     
     private func updateFlashButtonState() {
@@ -178,45 +180,14 @@ public extension UIView {
     
     private func performWithTimer(_ interval: Int, block: @escaping () -> ()) {
         if interval > 0 {
-            showCountdown(interval)
-            DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(interval), execute: block)
+            let countdownLabel = CoundownLabel(seconds: interval, action: block)
+            addTaggedSubview(countdownLabel, tag: theCountdownLabelTag, constrain: .centerX, .centerY)
         }
         else {
             block()
         }
     }
     
-    private func showCountdown(_ interval: Int) {
-        // add countdown label
-        let countdownLabel = UILabel()
-        countdownLabel.textColor = .white
-        countdownLabel.shadowColor = UIColor.black.withAlphaComponent(0.5)
-        let fontSize = min(bounds.width / 2, bounds.height / 3)
-        countdownLabel.font = .boldSystemFont(ofSize: fontSize)
-        countdownLabel.shadowOffset = CGSize(width: fontSize/30, height: fontSize/15)
-        countdownLabel.translatesAutoresizingMaskIntoConstraints = false
-        addTaggedSubview(countdownLabel, tag: theCountdownLabelTag, constrain: .centerX, .centerY)
-        
-        // set timer
-        countdown()
-    }
-    
-    private func countdown() {
-        // change countdown label until it is 0
-        if let countdownLabel = viewWithTag(theCountdownLabelTag) as? UILabel {
-            let secondsLeft = (Int(countdownLabel.text ?? "") ?? timerInterval + 1) - 1
-            if secondsLeft > 0 {
-                countdownLabel.text = "\(secondsLeft)"
-                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                    self.countdown()
-                }
-            }
-            else {
-                countdownLabel.removeFromSuperview()
-            }
-        }
-    }
-
     // MARK: - Action: Pinch to Zoom
 
     func pinchToZoom(_ sender: UIPinchGestureRecognizer) {
@@ -360,6 +331,51 @@ extension UIButton {
         return button
     }
 }
+
+// MARK: - Countdown Label
+
+class CoundownLabel: UILabel {
+    var remainingSeconds: Int = 0
+    let action: ()->Void
+    private var dispatchWorkItem: DispatchWorkItem?
+
+    init(seconds: Int, action: @escaping ()->Void) {
+        self.action = action
+        remainingSeconds = seconds
+        super.init(frame: .zero)
+
+        textColor = .white
+        shadowColor = UIColor.black.withAlphaComponent(0.5)
+        let fontSize = min(UIScreen.main.bounds.width / 2, UIScreen.main.bounds.height / 3)
+        font = .boldSystemFont(ofSize: fontSize)
+        shadowOffset = CGSize(width: fontSize/30, height: fontSize/15)
+
+        countdown()
+    }
+
+    required init?(coder: NSCoder) {
+        action = {}
+        super.init(coder: coder)
+    }
+
+    deinit {
+        dispatchWorkItem?.cancel()
+    }
+
+    private func countdown() {
+        if remainingSeconds > 0 {
+            text = "\(remainingSeconds)"
+            remainingSeconds -= 1
+            dispatchWorkItem = DispatchWorkItem {[weak self] in self?.countdown()}
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: dispatchWorkItem!)
+        }
+        else {
+            removeFromSuperview()
+            action()
+        }
+    }
+}
+
 
 // MARK: - Focus Box
 
