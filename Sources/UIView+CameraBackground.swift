@@ -535,14 +535,12 @@ private extension AVCaptureDevice {
     }
     
     func performWithLock(_ block: ()->()) {
-        var error: NSError?
         do {
             try lockForConfiguration()
             block()
             unlockForConfiguration()
-        } catch let error1 as NSError {
-            error = error1
-            NSLog("Failed to acquire AVCaptureDevice.lockForConfiguration: \(error?.localizedDescription)")
+        } catch let error as NSError {
+            NSLog("Failed to acquire AVCaptureDevice.lockForConfiguration: \(error.localizedDescription)")
         }
     }
 }
