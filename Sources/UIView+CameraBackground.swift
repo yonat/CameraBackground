@@ -15,7 +15,7 @@ public extension UIView {
     // MARK: - Public Camera Interface
 
     /// Change the current camera background layer, e.g. when a user taps a camera on/off button.
-    public func toggleCameraBackground(_ position: AVCaptureDevicePosition = .unspecified, buttonMargins: UIEdgeInsets = .zero) {
+    @objc public func toggleCameraBackground(_ position: AVCaptureDevice.Position = .unspecified, buttonMargins: UIEdgeInsets = .zero) {
         if let _ = cameraLayer {
             removeCameraBackground()
         }
@@ -24,23 +24,24 @@ public extension UIView {
         }
     }
     /// Remove camera background layer
-    public func removeCameraBackground() {
+    @objc public func removeCameraBackground() {
         removeCameraControls()
         cameraLayer?.removeFromSuperlayer()
     }
 
     /// Add camera background layer
-    public func addCameraBackground(_ position: AVCaptureDevicePosition = .unspecified, buttonMargins: UIEdgeInsets = .zero) {
-        let session = AVCaptureSession.stillCameraCaptureSession(position)
-        let cameraLayer = AVCaptureVideoPreviewLayer(session: session)
-        if session == nil {
-            cameraLayer?.backgroundColor = UIColor.black.cgColor
+    @objc public func addCameraBackground(_ position: AVCaptureDevice.Position = .unspecified, buttonMargins: UIEdgeInsets = .zero) {
+        let cameraLayer: CALayer
+        if let session = AVCaptureSession.stillCameraCaptureSession(position) {
+            let captureLayer = AVCaptureVideoPreviewLayer(session: session)
+            captureLayer.videoGravity = AVLayerVideoGravity.resizeAspectFill
+            cameraLayer = captureLayer
         }
         else {
-            cameraLayer?.videoGravity = AVLayerVideoGravityResizeAspectFill
+            cameraLayer = CALayer()
+            cameraLayer.backgroundColor = UIColor.black.cgColor
         }
-
-        layer.insertBackgroundLayer(cameraLayer!, name: theCameraLayerName)
+        layer.insertBackgroundLayer(cameraLayer, name: theCameraLayerName)
         addCameraControls(buttonMargins)
     }
 
@@ -48,36 +49,35 @@ public extension UIView {
     /// - Parameters:
     ///   - onTime: action to perform when the timer completes countdown. E.g., make a click sound and/or show a flash.
     ///   - completion: handle captured image.
-    public func takeCameraSnapshot(_ onTime: (() -> Void)?, completion: ((_ capturedImage: UIImage?, _ error: NSError?) -> ())? = nil) {
-        if let cameraLayer = cameraLayer {
-            viewWithTag(theCountdownLabelTag)?.removeFromSuperview()
-            performWithTimer(timerInterval) {
-                onTime?()
-                cameraLayer.connection.isEnabled = false // to freeze image
-                cameraLayer.captureStillImage( {(capturedImage, error) in
-                    cameraLayer.session.stopRunning()
-                    completion?(capturedImage, error)
-                })
-            }
+    @objc public func takeCameraSnapshot(_ onTime: (() -> Void)?, completion: ((_ capturedImage: UIImage?, _ error: NSError?) -> ())? = nil) {
+        guard let cameraLayer = cameraLayer else {return}
+        viewWithTag(theCountdownLabelTag)?.removeFromSuperview()
+        performWithTimer(timerInterval) {
+            onTime?()
+            cameraLayer.connection?.isEnabled = false // to freeze image
+            cameraLayer.captureStillImage( {(capturedImage, error) in
+                cameraLayer.session?.stopRunning()
+                completion?(capturedImage, error)
+            })
         }
     }
 
     /// Re-start streaming input from camera into background layer.
-    public func freeCameraSnapshot() {
-        cameraLayer?.connection.isEnabled = true // to unfreeze image
-        cameraLayer?.session.startRunning()
+    @objc public func freeCameraSnapshot() {
+        cameraLayer?.connection?.isEnabled = true // to unfreeze image
+        cameraLayer?.session?.startRunning()
         removeFocusBox()
     }
 
     /// The background layer showing camera input stream.
-    public var cameraLayer: AVCaptureVideoPreviewLayer? {
+    @objc public var cameraLayer: AVCaptureVideoPreviewLayer? {
         return layer.sublayerNamed(theCameraLayerName) as? AVCaptureVideoPreviewLayer
     }
     
     // MARK: - Private Camera Controls
     
     private var device: AVCaptureDevice? {
-        return (cameraLayer?.session?.inputs?.first as? AVCaptureDeviceInput)?.device
+        return (cameraLayer?.session?.inputs.first as? AVCaptureDeviceInput)?.device
     }
 
     private func addCameraControls(_ margins: UIEdgeInsets = .zero) {
@@ -103,7 +103,7 @@ public extension UIView {
         updateFlashButtonState()
         
         // switch camera button
-        if AVCaptureDevice.devices(withMediaType: AVMediaTypeVideo).count > 1 || UIDevice.isSimulator {
+        if AVCaptureDevice.devices(for: AVMediaType.video).count > 1 || UIDevice.isSimulator {
             let cameraButton = UIButton.buttonWithImage(bundeledCameraTemplateImage("camera-switch")!, target: self, action: #selector(switchCamera(_:)))
             panel.addTaggedSubview(cameraButton, tag: theSwitchButtonTag, constrain: .top, .right)
         }
@@ -143,11 +143,11 @@ public extension UIView {
     
     // MARK: - Action: Switch Front/Back Camera
 
-    func switchCamera(_ sender: UIButton) {
+    @objc func switchCamera(_ sender: UIButton) {
         // TODO: animate
         if let session = cameraLayer?.session {
-            var cameraPosition = AVCaptureDevicePosition.unspecified
-            if let input = session.inputs?.first as? AVCaptureDeviceInput {
+            var cameraPosition = AVCaptureDevice.Position.unspecified
+            if let input = session.inputs.first as? AVCaptureDeviceInput {
                 cameraPosition = input.device.position
                 session.removeInput(input)
             }
@@ -162,7 +162,7 @@ public extension UIView {
     func setFlashMode(_ rawValue: NSInteger) {
         if let device = device {
             if device.hasFlash {
-                if let newMode = AVCaptureFlashMode(rawValue: rawValue) {
+                if let newMode = AVCaptureDevice.FlashMode(rawValue: rawValue) {
                     device.changeFlashMode(newMode)
                 }
             }
@@ -190,7 +190,7 @@ public extension UIView {
     
     // MARK: - Action: Pinch to Zoom
 
-    func pinchToZoom(_ sender: UIPinchGestureRecognizer) {
+    @objc func pinchToZoom(_ sender: UIPinchGestureRecognizer) {
         struct Static {
             static var initialZoom: CGFloat = 1
         }
@@ -204,7 +204,7 @@ public extension UIView {
     
     // MARK: - Action: Tap to Focus
 
-    func tapToFocus(_ sender: UITapGestureRecognizer) {
+    @objc func tapToFocus(_ sender: UITapGestureRecognizer) {
         let focusPoint = sender.location(in: self)
 
         if let device = device {
@@ -228,7 +228,7 @@ public extension UIView {
         cameraLayer?.addSublayer(focusLayer)
     }
     
-    func removeFocusBox() { // not private because it is a selector for AVCaptureDeviceSubjectAreaDidChangeNotification
+    @objc func removeFocusBox() { // not private because it is a selector for AVCaptureDeviceSubjectAreaDidChangeNotification
         cameraLayer?.sublayerNamed(theFocusLayerName)?.removeFromSuperlayer()
         if let device = device {
             let interestPoint = device.isFocusPointOfInterestSupported ? device.focusPointOfInterest : device.exposurePointOfInterest
@@ -452,17 +452,17 @@ private extension UIColor {
 }
 
 private extension AVCaptureSession {
-    class func stillCameraCaptureSession(_ position: AVCaptureDevicePosition) -> AVCaptureSession? {
+    class func stillCameraCaptureSession(_ position: AVCaptureDevice.Position) -> AVCaptureSession? {
         if UIDevice.isSimulator {return nil}
         let session = AVCaptureSession()
-        session.sessionPreset = AVCaptureSessionPresetPhoto
+        session.sessionPreset = AVCaptureSession.Preset.photo
         session.addCameraInput(position)
         session.addOutput( AVCaptureStillImageOutput() )
         session.startRunning()
         return session
     }
 
-    func addCameraInput(_ position: AVCaptureDevicePosition) {
+    func addCameraInput(_ position: AVCaptureDevice.Position) {
         guard let device = AVCaptureDevice.deviceWithPosition(position) else {return}
         if device.hasFlash {
             device.changeFlashMode(.auto)
@@ -479,8 +479,8 @@ private extension AVCaptureSession {
     }
 }
 
-private extension AVCaptureDevicePosition {
-    func opposite() -> AVCaptureDevicePosition {
+private extension AVCaptureDevice.Position {
+    func opposite() -> AVCaptureDevice.Position {
         switch self {
         case .front:  return .back
         case .back: return .front
@@ -490,19 +490,14 @@ private extension AVCaptureDevicePosition {
 }
 
 private extension AVCaptureDevice {
-    class func deviceWithPosition(_ position: AVCaptureDevicePosition) -> AVCaptureDevice? {
-        if position != .unspecified {
-            guard let devices = devices(withMediaType: AVMediaTypeVideo) as? [AVCaptureDevice] else {return nil}
-            for device in devices {
-                if device.position == position {
-                    return device
-                }
-            }
+    class func deviceWithPosition(_ position: AVCaptureDevice.Position) -> AVCaptureDevice? {
+        if position != .unspecified, let device = devices(for: AVMediaType.video).first(where: {$0.position == position}) {
+            return device
         }
-        return defaultDevice(withMediaType: AVMediaTypeVideo)
+        return AVCaptureDevice.default(for: AVMediaType.video)
     }
     
-    func changeFlashMode(_ mode: AVCaptureFlashMode) {
+    func changeFlashMode(_ mode: AVCaptureDevice.FlashMode) {
         performWithLock() {
             self.flashMode = mode
         }
@@ -559,10 +554,10 @@ private extension AVCaptureVideoPreviewLayer {
                     if let error = error {
                         completion?(nil, error as NSError?)
                     }
-                    else {
+                    else if let imageBuffer = imageBuffer {
                         let imageData = AVCaptureStillImageOutput.jpegStillImageNSDataRepresentation(imageBuffer)
                         if var image = UIImage(data: imageData!) {
-                            if (self.session?.inputs?.first as? AVCaptureDeviceInput)?.device.position == .front { // flip front camera
+                            if (self.session?.inputs.first as? AVCaptureDeviceInput)?.device.position == .front { // flip front camera
                                 image = UIImage(cgImage: image.cgImage!, scale: image.scale, orientation: .rightMirrored)
                             }
                             completion?(image, nil)
@@ -596,9 +591,9 @@ private extension AVCaptureVideoPreviewLayer {
 
 private extension AVCaptureOutput {
     var videoConnection: AVCaptureConnection? {
-        for connection in connections as! [AVCaptureConnection] {
-            for port in connection.inputPorts as! [AVCaptureInputPort] {
-                if port.mediaType == AVMediaTypeVideo {
+        for connection in connections {
+            for port in connection.inputPorts {
+                if port.mediaType == AVMediaType.video {
                     return connection
                 }
             }

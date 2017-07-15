@@ -23,7 +23,7 @@ class CameraBackgroundViewController: UIViewController {
         view.addCameraBackground(.back, buttonMargins: view.layoutMargins)
     }
     
-    func shoot() {
+    @objc func shoot() {
         view.takeCameraSnapshot( {
                 // animate snapshot capture
                 self.view.alpha = 0
