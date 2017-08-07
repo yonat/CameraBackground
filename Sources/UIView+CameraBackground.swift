@@ -32,7 +32,7 @@ public extension UIView {
     /// Add camera background layer
     public func addCameraBackground(_ position: AVCaptureDevicePosition = .unspecified, buttonMargins: UIEdgeInsets = .zero) {
         let session = AVCaptureSession.stillCameraCaptureSession(position)
-        let cameraLayer = AVCaptureVideoPreviewLayer(session: session)
+        let cameraLayer = CameraLayer(session: session)
         if session == nil {
             cameraLayer?.backgroundColor = UIColor.black.cgColor
         }
@@ -237,6 +237,42 @@ public extension UIView {
                 device.changeInterestPoint(center)
             }
         }
+    }
+}
+
+class CameraLayer: AVCaptureVideoPreviewLayer {
+    override init!(session: AVCaptureSession!) {
+        super.init(session: session)
+        setup()
+    }
+
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        setup()
+    }
+
+    override init(layer: Any) {
+        super.init(layer: layer)
+        setup()
+    }
+
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+
+    private func setup() {
+        NotificationCenter.default.addObserver(forName: .UIDeviceOrientationDidChange, object: nil, queue: nil) { [weak self] (notification) in
+            self?.updateCameraFrameAndOrientation()
+        }
+    }
+
+    func updateCameraFrameAndOrientation() {
+        guard let superlayer = superlayer else {return}
+        frame = superlayer.bounds
+        guard let connection = connection, connection.isVideoOrientationSupported,
+            let appOrientation = AVCaptureVideoOrientation(rawValue: UIApplication.shared.statusBarOrientation.rawValue)
+            else {return}
+        connection.videoOrientation = appOrientation
     }
 }
 

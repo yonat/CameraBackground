@@ -2,7 +2,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "CameraBackground"
-  s.version      = "1.1.2"
+  s.version      = "1.2"
   s.summary      = "Show camera layer as a background to any UIView."
 
   s.description  = <<-DESC
