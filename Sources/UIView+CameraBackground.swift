@@ -15,12 +15,12 @@ public extension UIView {
     // MARK: - Public Camera Interface
 
     /// Change the current camera background layer, e.g. when a user taps a camera on/off button.
-    @objc public func toggleCameraBackground(_ position: AVCaptureDevice.Position = .unspecified, buttonMargins: UIEdgeInsets = .zero) {
+    @objc public func toggleCameraBackground(_ position: AVCaptureDevice.Position = .unspecified, showButtons: Bool = true, buttonMargins: UIEdgeInsets = .zero) {
         if let _ = cameraLayer {
             removeCameraBackground()
         }
         else {
-            addCameraBackground(position, buttonMargins: buttonMargins)
+            addCameraBackground(position, showButtons: showButtons, buttonMargins: buttonMargins)
         }
     }
     /// Remove camera background layer
@@ -30,7 +30,7 @@ public extension UIView {
     }
 
     /// Add camera background layer
-    @objc public func addCameraBackground(_ position: AVCaptureDevice.Position = .unspecified, buttonMargins: UIEdgeInsets = .zero) {
+    @objc public func addCameraBackground(_ position: AVCaptureDevice.Position = .unspecified, showButtons: Bool = true, buttonMargins: UIEdgeInsets = .zero) {
         let session = AVCaptureSession.stillCameraCaptureSession(position)
         let cameraLayer = CameraLayer(session: session ?? AVCaptureSession())
         if session == nil {
@@ -41,7 +41,9 @@ public extension UIView {
         }
 
         layer.insertBackgroundLayer(cameraLayer, name: theCameraLayerName)
-        addCameraControls(buttonMargins)
+        if showButtons {
+            addCameraControls(buttonMargins)
+        }
     }
 
     /// Take snapshot of the camera input shown in the background layer.
