@@ -14,7 +14,7 @@ class CameraBackgroundViewController: UIViewController {
     
     override func viewDidLoad() {
         let shootButton = UIButton(type: .custom)
-        shootButton.setImage( bundeledCameraTemplateImage("record"), for: .normal)
+        shootButton.setImage( bundledCameraTemplateImage("record"), for: .normal)
         shootButton.addTarget(self, action: #selector(shoot), for: .touchUpInside)
         shootButton.tag = 7
 

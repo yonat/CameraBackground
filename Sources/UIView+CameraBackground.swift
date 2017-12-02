@@ -93,11 +93,11 @@ public extension UIView {
         constrain(panel, at: .right, diff: -margins.right)
         
         // timer button
-        let timerButton = MultiToggleButton(image: bundeledCameraTemplateImage("camera-timer"), states: ["", "3s", "10s"], colors: [nil, UIColor.cameraOnColor(), UIColor.cameraOnColor(), UIColor.cameraOnColor()])
+        let timerButton = MultiToggleButton(image: bundledCameraTemplateImage("camera-timer"), states: ["", "3s", "10s"], colors: [nil, UIColor.cameraOnColor(), UIColor.cameraOnColor(), UIColor.cameraOnColor()])
         panel.addTaggedSubview(timerButton, tag: theTimerButtonTag, constrain: .top, .centerX, .bottom) // .bottom constraint sets panel height
         
         // flash button
-        let flashButton = MultiToggleButton(image: bundeledCameraTemplateImage("camera-flash"), states: ["Off", "On", "Auto"], colors: [nil, UIColor.cameraOnColor()]) { (sender) -> () in
+        let flashButton = MultiToggleButton(image: bundledCameraTemplateImage("camera-flash"), states: ["Off", "On", "Auto"], colors: [nil, UIColor.cameraOnColor()]) { (sender) -> () in
             self.setFlashMode(sender.currentStateIndex)
         }
         panel.addTaggedSubview(flashButton, tag: theFlashButtonTag, constrain: .top, .left)
@@ -105,7 +105,7 @@ public extension UIView {
         
         // switch camera button
         if AVCaptureDevice.devices(for: AVMediaType.video).count > 1 || UIDevice.isSimulator {
-            let cameraButton = UIButton.buttonWithImage(bundeledCameraTemplateImage("camera-switch")!, target: self, action: #selector(switchCamera(_:)))
+            let cameraButton = UIButton.buttonWithImage(bundledCameraTemplateImage("camera-switch")!, target: self, action: #selector(switchCamera(_:)))
             panel.addTaggedSubview(cameraButton, tag: theSwitchButtonTag, constrain: .top, .right)
         }
         
@@ -301,7 +301,7 @@ public extension UITraitEnvironment {
         return nil
     }
 
-    public func bundeledCameraTemplateImage(_ named: String) -> UIImage? {
+    public func bundledCameraTemplateImage(_ named: String) -> UIImage? {
         return bundledCameraImage(named)?.withRenderingMode(.alwaysTemplate)
     }
 }
