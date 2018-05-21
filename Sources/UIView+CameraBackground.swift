@@ -7,22 +7,23 @@
 //
 
 import AVFoundation
-import UIKit
 import MiniLayout
 import MultiToggleButton
+import UIKit
 
 public extension UIView {
+
     // MARK: - Public Camera Interface
 
     /// Change the current camera background layer, e.g. when a user taps a camera on/off button.
     @objc public func toggleCameraBackground(_ position: AVCaptureDevice.Position = .unspecified, showButtons: Bool = true, buttonMargins: UIEdgeInsets = .zero) {
-        if let _ = cameraLayer {
+        if nil != cameraLayer {
             removeCameraBackground()
-        }
-        else {
+        } else {
             addCameraBackground(position, showButtons: showButtons, buttonMargins: buttonMargins)
         }
     }
+
     /// Remove camera background layer
     @objc public func removeCameraBackground() {
         removeCameraControls()
@@ -35,8 +36,7 @@ public extension UIView {
         let cameraLayer = CameraLayer(session: session ?? AVCaptureSession())
         if session == nil {
             cameraLayer.backgroundColor = UIColor.black.cgColor
-        }
-        else {
+        } else {
             cameraLayer.videoGravity = AVLayerVideoGravity.resizeAspectFill
         }
 
@@ -50,13 +50,13 @@ public extension UIView {
     /// - Parameters:
     ///   - onTime: action to perform when the timer completes countdown. E.g., make a click sound and/or show a flash.
     ///   - completion: handle captured image.
-    @objc public func takeCameraSnapshot(_ onTime: (() -> Void)?, completion: ((_ capturedImage: UIImage?, _ error: NSError?) -> ())? = nil) {
-        guard let cameraLayer = cameraLayer else {return}
+    @objc public func takeCameraSnapshot(_ onTime: (() -> Void)?, completion: ((_ capturedImage: UIImage?, _ error: NSError?) -> Void)? = nil) {
+        guard let cameraLayer = cameraLayer else { return }
         viewWithTag(theCountdownLabelTag)?.removeFromSuperview()
         performWithTimer(timerInterval) {
             onTime?()
             cameraLayer.connection?.isEnabled = false // to freeze image
-            cameraLayer.captureStillImage( {(capturedImage, error) in
+            cameraLayer.captureStillImage({ capturedImage, error in
                 cameraLayer.session?.stopRunning()
                 completion?(capturedImage, error)
             })
@@ -74,9 +74,9 @@ public extension UIView {
     @objc public var cameraLayer: AVCaptureVideoPreviewLayer? {
         return layer.sublayerNamed(theCameraLayerName) as? AVCaptureVideoPreviewLayer
     }
-    
+
     // MARK: - Private Camera Controls
-    
+
     private var device: AVCaptureDevice? {
         return (cameraLayer?.session?.inputs.first as? AVCaptureDeviceInput)?.device
     }
@@ -91,31 +91,39 @@ public extension UIView {
         constrain(panel, at: .top, diff: margins.top)
         constrain(panel, at: .left, diff: margins.left)
         constrain(panel, at: .right, diff: -margins.right)
-        
+
         // timer button
-        let timerButton = MultiToggleButton(image: bundledCameraTemplateImage("camera-timer"), states: ["", "3s", "10s"], colors: [nil, UIColor.cameraOnColor(), UIColor.cameraOnColor(), UIColor.cameraOnColor()])
+        let timerButton = MultiToggleButton(
+            image: bundledCameraTemplateImage("camera-timer"),
+            states: ["", "3s", "10s"],
+            colors: [nil, .cameraOnColor, .cameraOnColor, .cameraOnColor]
+        )
         panel.addTaggedSubview(timerButton, tag: theTimerButtonTag, constrain: .top, .centerX, .bottom) // .bottom constraint sets panel height
-        
+
         // flash button
-        let flashButton = MultiToggleButton(image: bundledCameraTemplateImage("camera-flash"), states: ["Off", "On", "Auto"], colors: [nil, UIColor.cameraOnColor()]) { (sender) -> () in
+        let flashButton = MultiToggleButton(
+            image: bundledCameraTemplateImage("camera-flash"),
+            states: ["Off", "On", "Auto"],
+            colors: [nil, .cameraOnColor]
+        ) { sender in
             self.setFlashMode(sender.currentStateIndex)
         }
         panel.addTaggedSubview(flashButton, tag: theFlashButtonTag, constrain: .top, .left)
         updateFlashButtonState()
-        
+
         // switch camera button
         if AVCaptureDevice.devices(for: AVMediaType.video).count > 1 || UIDevice.isSimulator {
-            let cameraButton = UIButton.buttonWithImage(bundledCameraTemplateImage("camera-switch")!, target: self, action: #selector(switchCamera(_:)))
+            let cameraButton = UIButton.buttonWithImage(bundledCameraTemplateImage("camera-switch"), target: self, action: #selector(switchCamera(_:)))
             panel.addTaggedSubview(cameraButton, tag: theSwitchButtonTag, constrain: .top, .right)
         }
-        
+
         // focus and zoom gestures - uses gesture subclass to make it identifiable when removing camera
-        addGestureRecognizer( CameraPinchGestureRecognizer(target: self, action: #selector(pinchToZoom(_:))) )
-        addGestureRecognizer( CameraTapGestureRecognizer(target: self, action: #selector(tapToFocus(_:))) )
+        addGestureRecognizer(CameraPinchGestureRecognizer(target: self, action: #selector(pinchToZoom(_:))))
+        addGestureRecognizer(CameraTapGestureRecognizer(target: self, action: #selector(tapToFocus(_:))))
         device?.changeMonitoring(true)
-        NotificationCenter.default.addObserver(self, selector: #selector(removeFocusBox), name: NSNotification.Name.AVCaptureDeviceSubjectAreaDidChange, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(removeFocusBox), name: .AVCaptureDeviceSubjectAreaDidChange, object: nil)
     }
-    
+
     private func removeCameraControls() {
         // remove focus and zoom gestures
         gestureRecognizerOfType(CameraPinchGestureRecognizer.self)?.removeFromView()
@@ -127,25 +135,23 @@ public extension UIView {
         viewWithTag(thePanelViewTag)?.removeFromSuperview()
         viewWithTag(theCountdownLabelTag)?.removeFromSuperview()
     }
-    
+
     private func updateFlashButtonState() {
         if let device = device {
             if let flashButton = viewWithTag(theFlashButtonTag) as? MultiToggleButton {
                 if device.hasFlash {
                     flashButton.isHidden = false
                     flashButton.currentStateIndex = device.flashMode.rawValue
-                }
-                else {
+                } else {
                     flashButton.isHidden = true
                 }
             }
         }
     }
-    
+
     // MARK: - Action: Switch Front/Back Camera
 
-    @objc func switchCamera(_ sender: UIButton) {
-        // TODO: animate
+    @objc func switchCamera(_: UIButton) {
         if let session = cameraLayer?.session {
             var cameraPosition = AVCaptureDevice.Position.unspecified
             if let input = session.inputs.first as? AVCaptureDeviceInput {
@@ -157,7 +163,7 @@ public extension UIView {
             removeFocusBox()
         }
     }
-    
+
     // MARK: - Action: Toggle Flash Mode
 
     func setFlashMode(_ rawValue: NSInteger) {
@@ -169,7 +175,7 @@ public extension UIView {
             }
         }
     }
-    
+
     // MARK: - Action: Toggle Timer
 
     var timerInterval: Int {
@@ -178,17 +184,16 @@ public extension UIView {
         }
         return 0
     }
-    
-    private func performWithTimer(_ interval: Int, block: @escaping () -> ()) {
+
+    private func performWithTimer(_ interval: Int, block: @escaping () -> Void) {
         if interval > 0 {
             let countdownLabel = CoundownLabel(seconds: interval, action: block)
             addTaggedSubview(countdownLabel, tag: theCountdownLabelTag, constrain: .centerX, .centerY)
-        }
-        else {
+        } else {
             block()
         }
     }
-    
+
     // MARK: - Action: Pinch to Zoom
 
     @objc func pinchToZoom(_ sender: UIPinchGestureRecognizer) {
@@ -202,7 +207,7 @@ public extension UIView {
             device.changeZoomFactor(sender.scale * Static.initialZoom)
         }
     }
-    
+
     // MARK: - Action: Tap to Focus
 
     @objc func tapToFocus(_ sender: UITapGestureRecognizer) {
@@ -212,23 +217,22 @@ public extension UIView {
             if !device.isFocusPointOfInterestSupported && !device.isExposurePointOfInterestSupported {
                 return
             }
-            
+
             let interestPoint = CGPoint(x: (focusPoint.y - bounds.minY) / bounds.height, y: 1 - (focusPoint.x - bounds.minX) / bounds.width)
             device.changeInterestPoint(interestPoint)
             showFocusBox(focusPoint)
-        }
-        else if UIDevice.isSimulator {
+        } else if UIDevice.isSimulator {
             showFocusBox(focusPoint)
         }
     }
-    
+
     private func showFocusBox(_ center: CGPoint) {
         cameraLayer?.sublayerNamed(theFocusLayerName)?.removeFromSuperlayer()
         let focusLayer = FocusBoxLayer(center: center)
         focusLayer.name = theFocusLayerName
         cameraLayer?.addSublayer(focusLayer)
     }
-    
+
     @objc func removeFocusBox() { // not private because it is a selector for AVCaptureDeviceSubjectAreaDidChangeNotification
         cameraLayer?.sublayerNamed(theFocusLayerName)?.removeFromSuperlayer()
         if let device = device {
@@ -242,6 +246,8 @@ public extension UIView {
 }
 
 class CameraLayer: AVCaptureVideoPreviewLayer {
+    var observer: Any?
+
     override init(session: AVCaptureSession) {
         super.init(session: session)
         setup()
@@ -258,93 +264,34 @@ class CameraLayer: AVCaptureVideoPreviewLayer {
     }
 
     deinit {
-        NotificationCenter.default.removeObserver(self)
+        if let observer = observer {
+            NotificationCenter.default.removeObserver(observer)
+        }
     }
 
     private func setup() {
-        NotificationCenter.default.addObserver(forName: .UIDeviceOrientationDidChange, object: nil, queue: nil) { [weak self] (notification) in
+        observer = NotificationCenter.default.addObserver(forName: .UIDeviceOrientationDidChange, object: nil, queue: nil) { [weak self] _ in
             self?.updateCameraFrameAndOrientation()
         }
     }
 
     func updateCameraFrameAndOrientation() {
-        guard let superlayer = superlayer else {return}
+        guard let superlayer = superlayer else { return }
         frame = superlayer.bounds
         guard let connection = connection, connection.isVideoOrientationSupported,
             let appOrientation = AVCaptureVideoOrientation(rawValue: UIApplication.shared.statusBarOrientation.rawValue)
-            else {return}
+        else { return }
         connection.videoOrientation = appOrientation
-    }
-}
-
-// MARK: - Private Constants
-
-private let thePanelViewTag = 98765
-private let theSwitchButtonTag = thePanelViewTag + 1
-private let theFlashButtonTag = thePanelViewTag + 2
-private let theTimerButtonTag = thePanelViewTag + 3
-private let theCountdownLabelTag = thePanelViewTag + 4
-private let theCameraLayerName = "camera"
-private let theFocusLayerName = "focusSquare"
-
-// MARK: - Useful Extensions
-
-public extension UITraitEnvironment {
-    public func bundledCameraImage(_ named: String) -> UIImage? {
-        if let image = UIImage(named: named) {
-            return image
-        }
-        let podBundle = Bundle(for: FocusBoxLayer.self)
-        if let url = podBundle.url(forResource: "CameraBackground", withExtension: "bundle") {
-            return UIImage(named: named, in: Bundle(url: url), compatibleWith: traitCollection)
-        }
-        return nil
-    }
-
-    public func bundledCameraTemplateImage(_ named: String) -> UIImage? {
-        return bundledCameraImage(named)?.withRenderingMode(.alwaysTemplate)
-    }
-}
-
-extension UIDevice {
-    class var isSimulator: Bool {
-        return current.model.hasSuffix("Simulator")
-    }
-}
-
-extension UIView {
-    func gestureRecognizerOfType<T: UIGestureRecognizer>(_ type: T.Type) -> UIGestureRecognizer? {
-        if let gestureRecognizers = gestureRecognizers {
-            for g in gestureRecognizers {
-                if let gt = g as? T {
-                    return gt as UIGestureRecognizer
-                }
-            }
-        }
-        return nil
-    }
-    
-    func addTaggedSubview(_ subview: UIView, tag: Int, constrain: NSLayoutAttribute...) {
-        subview.tag = tag
-        subview.translatesAutoresizingMaskIntoConstraints = false
-        addSubview(subview)
-        constrain.forEach { self.constrain(subview, at: $0) }
-    }
-}
-
-extension UIGestureRecognizer {
-    func removeFromView() {
-        view?.removeGestureRecognizer(self)
     }
 }
 
 extension CALayer {
     func sublayerNamed(_ name: String) -> CALayer? {
-        guard let sublayers = sublayers else  {return nil}
-        for s in sublayers {
-            if let sName = s.name {
+        guard let sublayers = sublayers else { return nil }
+        for sublayer in sublayers {
+            if let sName = sublayer.name {
                 if sName == name {
-                    return s
+                    return sublayer
                 }
             }
         }
@@ -360,281 +307,28 @@ extension CALayer {
     }
 }
 
-extension UIButton {
-    class func buttonWithImage(_ image: UIImage, target: AnyObject, action: Selector) -> UIButton {
-        let button = UIButton(type: .custom)
-        button.setImage(image, for: UIControlState())
-        button.addTarget(target, action: action, for: .touchUpInside)
-        return button
-    }
-}
+// MARK: - Private Constants
 
-// MARK: - Countdown Label
-
-class CoundownLabel: UILabel {
-    var remainingSeconds: Int = 0
-    let action: ()->Void
-    private var dispatchWorkItem: DispatchWorkItem?
-
-    init(seconds: Int, action: @escaping ()->Void) {
-        self.action = action
-        remainingSeconds = seconds
-        super.init(frame: .zero)
-
-        textColor = .white
-        shadowColor = UIColor.black.withAlphaComponent(0.5)
-        let fontSize = min(UIScreen.main.bounds.width / 2, UIScreen.main.bounds.height / 3)
-        font = .boldSystemFont(ofSize: fontSize)
-        shadowOffset = CGSize(width: fontSize/30, height: fontSize/15)
-
-        countdown()
-    }
-
-    required init?(coder: NSCoder) {
-        action = {}
-        super.init(coder: coder)
-    }
-
-    deinit {
-        dispatchWorkItem?.cancel()
-    }
-
-    private func countdown() {
-        if remainingSeconds > 0 {
-            text = "\(remainingSeconds)"
-            remainingSeconds -= 1
-            dispatchWorkItem = DispatchWorkItem {[weak self] in self?.countdown()}
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: dispatchWorkItem!)
-        }
-        else {
-            removeFromSuperview()
-            action()
-        }
-    }
-}
-
-
-// MARK: - Focus Box
-
-class FocusBoxLayer : CAShapeLayer {
-    convenience init(center: CGPoint) {
-        self.init()
-        path = UIBezierPath(focusBoxAround: center, big: true).cgPath
-        strokeColor = UIColor.cameraOnColor().cgColor
-        fillColor = UIColor.clear.cgColor
-        
-        DispatchQueue.main.async {
-            self.path = UIBezierPath(focusBoxAround: center, big: false).cgPath
-        }
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-            self.opacity = 0.5
-        }
-    }
-    
-    override func action(forKey event: String) -> CAAction? { // animate changes to 'path'
-        switch event {
-        case "path":
-            let animation = CABasicAnimation(keyPath: event)
-            animation.duration = CATransaction.animationDuration()
-            animation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseOut)
-            return animation
-            
-        default:
-            return super.action(forKey: event)
-        }
-    }
-}
-
-extension UIBezierPath {
-    convenience init(focusBoxAround center: CGPoint, big: Bool = false) {
-        let size: CGFloat = big ? 150 : 75
-        let lineSize: CGFloat = 5
-        let square = CGRect(x: center.x - size/2, y: center.y - size/2, width: size, height: size)
-        self.init(rect: square)
-        move(to: CGPoint(x: center.x, y: square.minY))
-        addLine(to: CGPoint(x: center.x, y: square.minY + lineSize))
-        move(to: CGPoint(x: center.x, y: square.maxY))
-        addLine(to: CGPoint(x: center.x, y: square.maxY - lineSize))
-        move(to: CGPoint(x: square.minX, y: center.y))
-        addLine(to: CGPoint(x: square.minX + lineSize, y: center.y))
-        move(to: CGPoint(x: square.maxX, y: center.y))
-        addLine(to: CGPoint(x: square.maxX - lineSize, y: center.y))
-    }
-}
+private let thePanelViewTag = 98765
+private let theSwitchButtonTag = thePanelViewTag + 1
+private let theFlashButtonTag = thePanelViewTag + 2
+private let theTimerButtonTag = thePanelViewTag + 3
+private let theCountdownLabelTag = thePanelViewTag + 4
+private let theCameraLayerName = "camera"
+private let theFocusLayerName = "focusSquare"
 
 // MARK: - Identifiable Gesture Recognizers
 
-class CameraTapGestureRecognizer : UITapGestureRecognizer, UIGestureRecognizerDelegate {
+class CameraTapGestureRecognizer: UITapGestureRecognizer, UIGestureRecognizerDelegate {
     override init(target: Any?, action: Selector?) {
         super.init(target: target, action: action)
         cancelsTouchesInView = false
         delegate = self
     }
-    
+
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
         return !(touch.view is UIControl)
     }
 }
 
-private class CameraPinchGestureRecognizer : UIPinchGestureRecognizer {
-}
-
-// MARK: - Private AV Extensions
-
-private extension UIColor {
-    class func cameraOnColor() -> UIColor {
-        return UIColor(red: 0.99, green: 0.79, blue: 0.19, alpha: 1)
-    }
-}
-
-private extension AVCaptureSession {
-    class func stillCameraCaptureSession(_ position: AVCaptureDevice.Position) -> AVCaptureSession? {
-        if UIDevice.isSimulator {return nil}
-        let session = AVCaptureSession()
-        session.sessionPreset = AVCaptureSession.Preset.photo
-        session.addCameraInput(position)
-        session.addOutput( AVCaptureStillImageOutput() )
-        session.startRunning()
-        return session
-    }
-
-    func addCameraInput(_ position: AVCaptureDevice.Position) {
-        guard let device = AVCaptureDevice.deviceWithPosition(position) else {return}
-        if device.hasFlash {
-            device.changeFlashMode(.auto)
-        }
-
-        do {
-            let deviceInput = try AVCaptureDeviceInput(device: device)
-            if canAddInput(deviceInput) { addInput(deviceInput) }
-            else { NSLog("Can't add camera input for position \(position.rawValue)") }
-        }
-        catch {
-            NSLog("Can't access camera")
-        }
-    }
-}
-
-private extension AVCaptureDevice.Position {
-    func opposite() -> AVCaptureDevice.Position {
-        switch self {
-        case .front:  return .back
-        case .back: return .front
-        default: return self
-        }
-    }
-}
-
-private extension AVCaptureDevice {
-    class func deviceWithPosition(_ position: AVCaptureDevice.Position) -> AVCaptureDevice? {
-        if position != .unspecified, let device = devices(for: AVMediaType.video).first(where: {$0.position == position}) {
-            return device
-        }
-        return AVCaptureDevice.default(for: AVMediaType.video)
-    }
-    
-    func changeFlashMode(_ mode: AVCaptureDevice.FlashMode) {
-        performWithLock() {
-            self.flashMode = mode
-        }
-    }
-    
-    func changeInterestPoint(_ point: CGPoint) {
-        performWithLock() {
-            if self.isFocusPointOfInterestSupported {
-                self.focusPointOfInterest = point
-                self.focusMode = .continuousAutoFocus
-            }
-            if self.isExposurePointOfInterestSupported {
-                self.exposurePointOfInterest = point
-                self.exposureMode = .continuousAutoExposure
-            }
-        }
-    }
-    
-    func changeMonitoring(_ on: Bool) {
-        performWithLock() {
-            self.isSubjectAreaChangeMonitoringEnabled = on
-        }
-    }
-    
-    func changeZoomFactor(_ zoomFactor: CGFloat) {
-        let effectiveZoomFactor = min( max(zoomFactor, 1), 4)
-        performWithLock() {
-            self.videoZoomFactor = effectiveZoomFactor
-        }
-    }
-    
-    func performWithLock(_ block: ()->()) {
-        do {
-            try lockForConfiguration()
-            block()
-            unlockForConfiguration()
-        } catch let error as NSError {
-            NSLog("Failed to acquire AVCaptureDevice.lockForConfiguration: \(error.localizedDescription)")
-        }
-    }
-}
-
-private extension AVCaptureVideoPreviewLayer {
-    func captureStillImage( _ completion: ((_ capturedImage: UIImage?, _ error: NSError?) -> ())? ) {
-
-        let errorCompletion = {(code: Int, description: String) -> () in
-            completion?(nil, NSError(domain: "AVCaptureError", code: code, userInfo: [NSLocalizedDescriptionKey: description]))
-            return
-        }
-
-        if let imageOutput = imageOutput {
-            if let videoConnection = imageOutput.videoConnection {
-                imageOutput.captureStillImageAsynchronously(from: videoConnection, completionHandler: {(imageBuffer, error) in
-                    if let error = error {
-                        completion?(nil, error as NSError?)
-                    }
-                    else if let imageBuffer = imageBuffer {
-                        let imageData = AVCaptureStillImageOutput.jpegStillImageNSDataRepresentation(imageBuffer)
-                        if var image = UIImage(data: imageData!) {
-                            if (self.session?.inputs.first as? AVCaptureDeviceInput)?.device.position == .front { // flip front camera
-                                image = UIImage(cgImage: image.cgImage!, scale: image.scale, orientation: .rightMirrored)
-                            }
-                            completion?(image, nil)
-                        }
-                        else {
-                            errorCompletion(1, "Can't create UIImage from captured image data")
-                        }
-                    }
-                });
-            }
-            else {
-                errorCompletion(2, "Can't find video AVCaptureConnection")
-            }
-        }
-        else {
-            errorCompletion(3, "Can't find AVCaptureStillImageOutput")
-        }
-    }
-
-    var imageOutput: AVCaptureStillImageOutput? {
-        if let session = session {
-            for videoOutput in session.outputs {
-                if let imageOutput = videoOutput as? AVCaptureStillImageOutput {
-                    return imageOutput
-                }
-            }
-        }
-        return nil
-    }
-}
-
-private extension AVCaptureOutput {
-    var videoConnection: AVCaptureConnection? {
-        for connection in connections {
-            for port in connection.inputPorts {
-                if port.mediaType == AVMediaType.video {
-                    return connection
-                }
-            }
-        }
-        return nil
-    }
-}
+private class CameraPinchGestureRecognizer: UIPinchGestureRecognizer {}

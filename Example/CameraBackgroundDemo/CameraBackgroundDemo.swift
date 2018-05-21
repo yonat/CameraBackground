@@ -6,15 +6,16 @@
 //  Copyright (c) 2015 Yonat Sharon. All rights reserved.
 //
 
-import UIKit
 import CameraBackground
 import MiniLayout
+import UIKit
 
 class CameraBackgroundViewController: UIViewController {
-    
     override func viewDidLoad() {
+        super.viewDidLoad()
+
         let shootButton = UIButton(type: .custom)
-        shootButton.setImage( bundledCameraTemplateImage("record"), for: .normal)
+        shootButton.setImage(bundledCameraTemplateImage("record"), for: .normal)
         shootButton.addTarget(self, action: #selector(shoot), for: .touchUpInside)
         shootButton.tag = 7
 
@@ -22,24 +23,23 @@ class CameraBackgroundViewController: UIViewController {
         view.addConstrainedSubview(shootButton, constrain: .centerX, .bottom)
         view.addCameraBackground(.back, buttonMargins: view.layoutMargins)
     }
-    
+
     @objc func shoot() {
-        view.takeCameraSnapshot( {
-                // animate snapshot capture
-                self.view.alpha = 0
-                UIView.animate(withDuration: 1) { self.view.alpha = 1 }
-            },
-            completion: { (capturedImage, error) -> () in
-                self.view.freeCameraSnapshot() // unfreeze image
-                // ... handle capturedImage and error
-            }
+        view.takeCameraSnapshot({
+            // animate snapshot capture
+            self.view.alpha = 0
+            UIView.animate(withDuration: 1) { self.view.alpha = 1 }
+        },
+        completion: { capturedImage, error in
+            self.view.freeCameraSnapshot() // unfreeze image
+            _ = (capturedImage, error) // ... handle capturedImage and error
+        }
         )
     }
 }
 
 @UIApplicationMain
 class CameraBackgroundDemo: UIResponder, UIApplicationDelegate {
-
     var window: UIWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
@@ -51,4 +51,3 @@ class CameraBackgroundDemo: UIResponder, UIApplicationDelegate {
         return true
     }
 }
-
