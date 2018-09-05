@@ -40,11 +40,6 @@ view.removeCameraBackground()
 
 **Important:** Remeber to add `NSCameraUsageDescription` to your `Info.plist`.
 
-## Requirements
-
-- iOS 8.0+
-- Xcode 7.3
-
 ## Installation
 
 ### CocoaPods:
@@ -53,11 +48,13 @@ view.removeCameraBackground()
 pod 'CameraBackground'
 ```
 
-For legacy Swift 2.3:
+Legacy versions:
 
-```ruby
-pod 'CameraBackground', '~> 1.0.2'
-```
+| Swift version | CameraBackground version |
+| :---: | :---: |
+| 4.0 | 1.4.1 |
+| 3 | 1.2 |
+| 2.3 | 1.0.2 |
 
 ### Manually:
 
@@ -69,7 +66,7 @@ Copy `Sources/*` to your Xcode project.
 
 [https://github.com/yonat/CameraBackground](https://github.com/yonat/CameraBackground)
 
-[swift-image]:https://img.shields.io/badge/swift-4.0-orange.svg
+[swift-image]:https://img.shields.io/badge/swift-4.2-orange.svg
 [swift-url]: https://swift.org/
 [license-image]: https://img.shields.io/badge/License-MIT-blue.svg
 [license-url]: LICENSE.txt

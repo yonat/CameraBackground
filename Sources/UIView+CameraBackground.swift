@@ -12,7 +12,6 @@ import MultiToggleButton
 import UIKit
 
 public extension UIView {
-
     // MARK: - Public Camera Interface
 
     /// Change the current camera background layer, e.g. when a user taps a camera on/off button.
@@ -270,7 +269,7 @@ class CameraLayer: AVCaptureVideoPreviewLayer {
     }
 
     private func setup() {
-        observer = NotificationCenter.default.addObserver(forName: .UIDeviceOrientationDidChange, object: nil, queue: nil) { [weak self] _ in
+        observer = NotificationCenter.default.addObserver(forName: UIDevice.orientationDidChangeNotification, object: nil, queue: nil) { [weak self] _ in
             self?.updateCameraFrameAndOrientation()
         }
     }

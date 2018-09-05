@@ -28,7 +28,7 @@ class FocusBoxLayer: CAShapeLayer {
         case "path":
             let animation = CABasicAnimation(keyPath: event)
             animation.duration = CATransaction.animationDuration()
-            animation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseOut)
+            animation.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeOut)
             return animation
 
         default:

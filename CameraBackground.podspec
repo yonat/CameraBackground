@@ -2,7 +2,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "CameraBackground"
-  s.version      = "1.4.1"
+  s.version      = "1.5.0"
   s.summary      = "Show camera layer as a background to any UIView."
 
   s.description  = <<-DESC
@@ -42,7 +42,7 @@ view.removeCameraBackground()
   s.author             = { "Yonat Sharon" => "yonat@ootips.org" }
   s.social_media_url   = "http://twitter.com/yonatsharon"
 
-  s.swift_version = '4.0'
+  s.swift_version = '4.2'
   s.platform     = :ios, "8.0"
   s.requires_arc = true
 

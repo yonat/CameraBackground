@@ -53,7 +53,7 @@ extension UIView {
         return nil
     }
 
-    func addTaggedSubview(_ subview: UIView, tag: Int, constrain: NSLayoutAttribute...) {
+    func addTaggedSubview(_ subview: UIView, tag: Int, constrain: NSLayoutConstraint.Attribute...) {
         subview.tag = tag
         subview.translatesAutoresizingMaskIntoConstraints = false
         addSubview(subview)
@@ -70,7 +70,7 @@ extension UIGestureRecognizer {
 extension UIButton {
     class func buttonWithImage(_ image: UIImage?, target: AnyObject, action: Selector) -> UIButton {
         let button = UIButton(type: .custom)
-        button.setImage(image, for: UIControlState())
+        button.setImage(image, for: .normal)
         button.addTarget(target, action: action, for: .touchUpInside)
         return button
     }

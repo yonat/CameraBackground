@@ -30,11 +30,10 @@ class CameraBackgroundViewController: UIViewController {
             self.view.alpha = 0
             UIView.animate(withDuration: 1) { self.view.alpha = 1 }
         },
-        completion: { capturedImage, error in
+                                completion: { capturedImage, error in
             self.view.freeCameraSnapshot() // unfreeze image
             _ = (capturedImage, error) // ... handle capturedImage and error
-        }
-        )
+        })
     }
 }
 
@@ -42,7 +41,7 @@ class CameraBackgroundViewController: UIViewController {
 class CameraBackgroundDemo: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         let window = UIWindow(frame: UIScreen.main.bounds)
         window.backgroundColor = .white
         window.rootViewController = CameraBackgroundViewController()

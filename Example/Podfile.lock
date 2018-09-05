@@ -6,15 +6,15 @@ PODS:
   - CameraBackground/Resources (1.4.1):
     - MiniLayout
     - MultiToggleButton
-  - MiniLayout (1.2.1)
-  - MultiToggleButton (1.7.1)
+  - MiniLayout (1.3.0)
+  - MultiToggleButton (1.8.0)
 
 DEPENDENCIES:
   - CameraBackground (from `..`)
   - MiniLayout
 
 SPEC REPOS:
-  https://github.com/CocoaPods/Specs.git:
+  https://github.com/cocoapods/specs.git:
     - MiniLayout
     - MultiToggleButton
 
@@ -24,9 +24,9 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   CameraBackground: ebf0c8d077da1402f31c15235036b454dc9de7cd
-  MiniLayout: 9ee6ff0d73c1c2af09251e062e9b45d012e446fb
-  MultiToggleButton: 65321595e53626b4c79fa058f9c48a29a5055a7c
+  MiniLayout: 57c42e7e44cb47a9ef95650970ee1d2718725518
+  MultiToggleButton: eca1625dab98b028e878c18c624eee05cac83c96
 
 PODFILE CHECKSUM: 8e7485b2027f23e092324c319932ba5da990cd54
 
-COCOAPODS: 1.5.0
+COCOAPODS: 1.5.3
