@@ -52,9 +52,9 @@ Legacy versions:
 
 | Swift version | CameraBackground version |
 | :---: | :---: |
-| 4.0 | 1.4.1 |
-| 3 | 1.2 |
-| 2.3 | 1.0.2 |
+| 4.0 (Xcode 9.4) | `pod 'CameraBackground', '~> 1.4.1'` |
+| 3 | `pod 'CameraBackground', '~> 1.2'` |
+| 2.3 | `pod 'CameraBackground', '~> 1.0.2'` |
 
 ### Manually:
 
