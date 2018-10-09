@@ -52,13 +52,6 @@ extension UIView {
         }
         return nil
     }
-
-    func addTaggedSubview(_ subview: UIView, tag: Int, constrain: NSLayoutConstraint.Attribute...) {
-        subview.tag = tag
-        subview.translatesAutoresizingMaskIntoConstraints = false
-        addSubview(subview)
-        constrain.forEach { self.constrain(subview, at: $0) }
-    }
 }
 
 extension UIGestureRecognizer {
@@ -73,5 +66,25 @@ extension UIButton {
         button.setImage(image, for: .normal)
         button.addTarget(target, action: action, for: .touchUpInside)
         return button
+    }
+}
+
+extension UIStackView {
+    convenience init(side: NSLayoutConstraint.Attribute) {
+        self.init()
+        distribution = .equalCentering
+
+        switch side {
+        case .left, .leftMargin, .leading, .leadingMargin:
+            alignment = .leading
+        case .right, .rightMargin, .trailing, .trailingMargin:
+            alignment = .trailing
+        default:
+            break
+        }
+        if alignment != .fill {
+            axis = .vertical
+            spacing = 32
+        }
     }
 }

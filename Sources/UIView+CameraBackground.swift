@@ -15,11 +15,16 @@ public extension UIView {
     // MARK: - Public Camera Interface
 
     /// Change the current camera background layer, e.g. when a user taps a camera on/off button.
-    @objc public func toggleCameraBackground(_ position: AVCaptureDevice.Position = .unspecified, showButtons: Bool = true, buttonMargins: UIEdgeInsets = .zero) {
+    @objc public func toggleCameraBackground(
+        _ position: AVCaptureDevice.Position = .unspecified,
+        showButtons: Bool = true,
+        buttonMargins: UIEdgeInsets = .zero,
+        buttonsLocation: NSLayoutConstraint.Attribute = .top
+    ) {
         if nil != cameraLayer {
             removeCameraBackground()
         } else {
-            addCameraBackground(position, showButtons: showButtons, buttonMargins: buttonMargins)
+            addCameraBackground(position, showButtons: showButtons, buttonMargins: buttonMargins, buttonsLocation: buttonsLocation)
         }
     }
 
@@ -30,7 +35,12 @@ public extension UIView {
     }
 
     /// Add camera background layer
-    @objc public func addCameraBackground(_ position: AVCaptureDevice.Position = .unspecified, showButtons: Bool = true, buttonMargins: UIEdgeInsets = .zero) {
+    @objc public func addCameraBackground(
+        _ position: AVCaptureDevice.Position = .unspecified,
+        showButtons: Bool = true,
+        buttonMargins: UIEdgeInsets = .zero,
+        buttonsLocation: NSLayoutConstraint.Attribute = .top
+    ) {
         let session = AVCaptureSession.stillCameraCaptureSession(position)
         let cameraLayer = CameraLayer(session: session ?? AVCaptureSession())
         if session == nil {
@@ -41,7 +51,7 @@ public extension UIView {
 
         layer.insertBackgroundLayer(cameraLayer, name: theCameraLayerName)
         if showButtons {
-            addCameraControls(buttonMargins)
+            addCameraControls(margins: buttonMargins, location: buttonsLocation)
         }
     }
 
@@ -80,9 +90,9 @@ public extension UIView {
         return (cameraLayer?.session?.inputs.first as? AVCaptureDeviceInput)?.device
     }
 
-    private func addCameraControls(_ margins: UIEdgeInsets = .zero) {
+    private func addCameraControls(margins: UIEdgeInsets = .zero, location: NSLayoutConstraint.Attribute = .top) {
         // buttons panel
-        let panel = UIView()
+        let panel = UIStackView(side: location)
         panel.tag = thePanelViewTag
         panel.tintColor = .white
         addSubview(panel)
@@ -90,14 +100,6 @@ public extension UIView {
         constrain(panel, at: .top, diff: margins.top)
         constrain(panel, at: .left, diff: margins.left)
         constrain(panel, at: .right, diff: -margins.right)
-
-        // timer button
-        let timerButton = MultiToggleButton(
-            image: bundledCameraTemplateImage("camera-timer"),
-            states: ["", "3s", "10s"],
-            colors: [nil, .cameraOnColor, .cameraOnColor, .cameraOnColor]
-        )
-        panel.addTaggedSubview(timerButton, tag: theTimerButtonTag, constrain: .top, .centerX, .bottom) // .bottom constraint sets panel height
 
         // flash button
         let flashButton = MultiToggleButton(
@@ -107,13 +109,24 @@ public extension UIView {
         ) { sender in
             self.setFlashMode(sender.currentStateIndex)
         }
-        panel.addTaggedSubview(flashButton, tag: theFlashButtonTag, constrain: .top, .left)
+        flashButton.tag = theFlashButtonTag
+        panel.addArrangedSubview(flashButton)
         updateFlashButtonState()
+
+        // timer button
+        let timerButton = MultiToggleButton(
+            image: bundledCameraTemplateImage("camera-timer"),
+            states: ["", "3s", "10s"],
+            colors: [nil, .cameraOnColor, .cameraOnColor, .cameraOnColor]
+        )
+        timerButton.tag = theTimerButtonTag
+        panel.addArrangedSubview(timerButton)
 
         // switch camera button
         if AVCaptureDevice.devices(for: AVMediaType.video).count > 1 || UIDevice.isSimulator {
             let cameraButton = UIButton.buttonWithImage(bundledCameraTemplateImage("camera-switch"), target: self, action: #selector(switchCamera(_:)))
-            panel.addTaggedSubview(cameraButton, tag: theSwitchButtonTag, constrain: .top, .right)
+            cameraButton.tag = theSwitchButtonTag
+            panel.addArrangedSubview(cameraButton)
         }
 
         // focus and zoom gestures - uses gesture subclass to make it identifiable when removing camera
@@ -187,7 +200,8 @@ public extension UIView {
     private func performWithTimer(_ interval: Int, block: @escaping () -> Void) {
         if interval > 0 {
             let countdownLabel = CoundownLabel(seconds: interval, action: block)
-            addTaggedSubview(countdownLabel, tag: theCountdownLabelTag, constrain: .centerX, .centerY)
+            countdownLabel.tag = theCountdownLabelTag
+            addConstrainedSubview(countdownLabel, constrain: .centerX, .centerY)
         } else {
             block()
         }

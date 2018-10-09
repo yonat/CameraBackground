@@ -38,7 +38,19 @@ view.takeCameraSnapshot( {
 view.removeCameraBackground()
 ```
 
-**Important:** Remeber to add `NSCameraUsageDescription` to your `Info.plist`.
+**Important:** Remember to add `NSCameraUsageDescription` to your `Info.plist`.
+
+### Layout
+
+You can change the location of the camera controls (flash, timer, and front/back camera selection) or hide them altogether:
+
+```swift
+view.addCameraBackground(
+   showButtons: true,
+   buttonMargins: UIEdgeInsets(top: 30, left: 10, bottom: 10, right: 10),
+   buttonsLocation: .left
+)
+```
 
 ## Installation
 

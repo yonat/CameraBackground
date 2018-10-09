@@ -117,7 +117,9 @@ extension AVCaptureVideoPreviewLayer {
                         if let imageData = AVCaptureStillImageOutput.jpegStillImageNSDataRepresentation(imageBuffer),
                             var image = UIImage(data: imageData) {
                             if (self.session?.inputs.first as? AVCaptureDeviceInput)?.device.position == .front { // flip front camera
+                                // swiftlint:disable force_unwrapping
                                 image = UIImage(cgImage: image.cgImage!, scale: image.scale, orientation: .rightMirrored)
+                                // swiftlint:enable force_unwrapping
                             }
                             completion?(image, nil)
                         } else {
