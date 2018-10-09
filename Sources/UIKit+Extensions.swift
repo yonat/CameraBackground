@@ -80,11 +80,11 @@ extension UIStackView {
         case .right, .rightMargin, .trailing, .trailingMargin:
             alignment = .trailing
         default:
-            break
+            semanticContentAttribute = .forceRightToLeft
         }
         if alignment != .fill {
             axis = .vertical
-            spacing = 32
+            spacing = 24
         }
     }
 }

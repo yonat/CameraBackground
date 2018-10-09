@@ -101,6 +101,22 @@ public extension UIView {
         constrain(panel, at: .left, diff: margins.left)
         constrain(panel, at: .right, diff: -margins.right)
 
+        // switch camera button
+        if AVCaptureDevice.devices(for: AVMediaType.video).count > 1 || UIDevice.isSimulator {
+            let cameraButton = UIButton.buttonWithImage(bundledCameraTemplateImage("camera-switch"), target: self, action: #selector(switchCamera(_:)))
+            cameraButton.tag = theSwitchButtonTag
+            panel.addArrangedSubview(cameraButton)
+        }
+
+        // timer button
+        let timerButton = MultiToggleButton(
+            image: bundledCameraTemplateImage("camera-timer"),
+            states: ["", "3s", "10s"],
+            colors: [nil, .cameraOnColor, .cameraOnColor, .cameraOnColor]
+        )
+        timerButton.tag = theTimerButtonTag
+        panel.addArrangedSubview(timerButton)
+
         // flash button
         let flashButton = MultiToggleButton(
             image: bundledCameraTemplateImage("camera-flash"),
@@ -112,22 +128,6 @@ public extension UIView {
         flashButton.tag = theFlashButtonTag
         panel.addArrangedSubview(flashButton)
         updateFlashButtonState()
-
-        // timer button
-        let timerButton = MultiToggleButton(
-            image: bundledCameraTemplateImage("camera-timer"),
-            states: ["", "3s", "10s"],
-            colors: [nil, .cameraOnColor, .cameraOnColor, .cameraOnColor]
-        )
-        timerButton.tag = theTimerButtonTag
-        panel.addArrangedSubview(timerButton)
-
-        // switch camera button
-        if AVCaptureDevice.devices(for: AVMediaType.video).count > 1 || UIDevice.isSimulator {
-            let cameraButton = UIButton.buttonWithImage(bundledCameraTemplateImage("camera-switch"), target: self, action: #selector(switchCamera(_:)))
-            cameraButton.tag = theSwitchButtonTag
-            panel.addArrangedSubview(cameraButton)
-        }
 
         // focus and zoom gestures - uses gesture subclass to make it identifiable when removing camera
         addGestureRecognizer(CameraPinchGestureRecognizer(target: self, action: #selector(pinchToZoom(_:))))
