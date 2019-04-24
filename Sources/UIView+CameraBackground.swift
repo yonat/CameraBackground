@@ -15,7 +15,7 @@ public extension UIView {
     // MARK: - Public Camera Interface
 
     /// Change the current camera background layer, e.g. when a user taps a camera on/off button.
-    @objc public func toggleCameraBackground(
+    @objc func toggleCameraBackground(
         _ position: AVCaptureDevice.Position = .unspecified,
         showButtons: Bool = true,
         buttonMargins: UIEdgeInsets = .zero,
@@ -29,13 +29,13 @@ public extension UIView {
     }
 
     /// Remove camera background layer
-    @objc public func removeCameraBackground() {
+    @objc func removeCameraBackground() {
         removeCameraControls()
         cameraLayer?.removeFromSuperlayer()
     }
 
     /// Add camera background layer
-    @objc public func addCameraBackground(
+    @objc func addCameraBackground(
         _ position: AVCaptureDevice.Position = .unspecified,
         showButtons: Bool = true,
         buttonMargins: UIEdgeInsets = .zero,
@@ -59,28 +59,28 @@ public extension UIView {
     /// - Parameters:
     ///   - onTime: action to perform when the timer completes countdown. E.g., make a click sound and/or show a flash.
     ///   - completion: handle captured image.
-    @objc public func takeCameraSnapshot(_ onTime: (() -> Void)?, completion: ((_ capturedImage: UIImage?, _ error: NSError?) -> Void)? = nil) {
+    @objc func takeCameraSnapshot(_ onTime: (() -> Void)?, completion: ((_ capturedImage: UIImage?, _ error: NSError?) -> Void)? = nil) {
         guard let cameraLayer = cameraLayer else { return }
         viewWithTag(theCountdownLabelTag)?.removeFromSuperview()
         performWithTimer(timerInterval) {
             onTime?()
             cameraLayer.connection?.isEnabled = false // to freeze image
-            cameraLayer.captureStillImage({ capturedImage, error in
+            cameraLayer.captureStillImage { capturedImage, error in
                 cameraLayer.session?.stopRunning()
                 completion?(capturedImage, error)
-            })
+            }
         }
     }
 
     /// Re-start streaming input from camera into background layer.
-    @objc public func freeCameraSnapshot() {
+    @objc func freeCameraSnapshot() {
         cameraLayer?.connection?.isEnabled = true // to unfreeze image
         cameraLayer?.session?.startRunning()
         removeFocusBox()
     }
 
     /// The background layer showing camera input stream.
-    @objc public var cameraLayer: AVCaptureVideoPreviewLayer? {
+    @objc var cameraLayer: AVCaptureVideoPreviewLayer? {
         return layer.sublayerNamed(theCameraLayerName) as? AVCaptureVideoPreviewLayer
     }
 
@@ -103,7 +103,7 @@ public extension UIView {
 
         // switch camera button
         if AVCaptureDevice.devices(for: AVMediaType.video).count > 1 || UIDevice.isSimulator {
-            let cameraButton = UIButton.buttonWithImage(bundledCameraTemplateImage("camera-switch"), target: self, action: #selector(switchCamera(_:)))
+            let cameraButton = UIButton.buttonWithImage(bundledCameraTemplateImage("camera-switch"), target: self, action: #selector(switchCamera))
             cameraButton.tag = theSwitchButtonTag
             panel.addArrangedSubview(cameraButton)
         }
@@ -130,8 +130,8 @@ public extension UIView {
         updateFlashButtonState()
 
         // focus and zoom gestures - uses gesture subclass to make it identifiable when removing camera
-        addGestureRecognizer(CameraPinchGestureRecognizer(target: self, action: #selector(pinchToZoom(_:))))
-        addGestureRecognizer(CameraTapGestureRecognizer(target: self, action: #selector(tapToFocus(_:))))
+        addGestureRecognizer(CameraPinchGestureRecognizer(target: self, action: #selector(pinchToZoom)))
+        addGestureRecognizer(CameraTapGestureRecognizer(target: self, action: #selector(tapToFocus)))
         device?.changeMonitoring(true)
         NotificationCenter.default.addObserver(self, selector: #selector(removeFocusBox), name: .AVCaptureDeviceSubjectAreaDidChange, object: nil)
     }
@@ -210,7 +210,7 @@ public extension UIView {
     // MARK: - Action: Pinch to Zoom
 
     @objc func pinchToZoom(_ sender: UIPinchGestureRecognizer) {
-        struct Static {
+        enum Static {
             static var initialZoom: CGFloat = 1
         }
         if let device = device {
@@ -259,8 +259,6 @@ public extension UIView {
 }
 
 class CameraLayer: AVCaptureVideoPreviewLayer {
-    var observer: Any?
-
     override init(session: AVCaptureSession) {
         super.init(session: session)
         setup()
@@ -276,19 +274,16 @@ class CameraLayer: AVCaptureVideoPreviewLayer {
         setup()
     }
 
-    deinit {
-        if let observer = observer {
-            NotificationCenter.default.removeObserver(observer)
-        }
-    }
-
     private func setup() {
-        observer = NotificationCenter.default.addObserver(forName: UIDevice.orientationDidChangeNotification, object: nil, queue: nil) { [weak self] _ in
-            self?.updateCameraFrameAndOrientation()
-        }
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(updateCameraFrameAndOrientation),
+            name: UIDevice.orientationDidChangeNotification,
+            object: nil
+        )
     }
 
-    func updateCameraFrameAndOrientation() {
+    @objc func updateCameraFrameAndOrientation() {
         guard let superlayer = superlayer else { return }
         frame = superlayer.bounds
         guard let connection = connection, connection.isVideoOrientationSupported,

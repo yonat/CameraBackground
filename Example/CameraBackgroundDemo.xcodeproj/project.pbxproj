@@ -87,12 +87,14 @@
 			buildConfigurationList = DCAA69811C1862D6009E2A55 /* Build configuration list for PBXNativeTarget "CameraBackgroundDemo" */;
 			buildPhases = (
 				1095C87B413EEDAFF02F1C90 /* [CP] Check Pods Manifest.lock */,
-				DCD5945B20B18046001B6E44 /* ShellScript */,
+				389496EE9890082B7385F5B5 /* [CP-User] SwiftFormat */,
+				88018194F8AC06496816AB76 /* [CP-User] SwiftLintAutocorrect */,
 				DCAA696B1C1862D6009E2A55 /* Sources */,
 				DCAA696C1C1862D6009E2A55 /* Frameworks */,
 				DCAA696D1C1862D6009E2A55 /* Resources */,
 				886033E7B38F738E8B67EDFF /* [CP] Embed Pods Frameworks */,
-				DCD5945C20B18056001B6E44 /* ShellScript */,
+				1D0403895053496EE9A8FB89 /* [CP] Copy Pods Resources */,
+				4F69E1BE0CB3F24634A03797 /* [CP-User] SwiftLint */,
 			);
 			buildRules = (
 			);
@@ -115,6 +117,7 @@
 				TargetAttributes = {
 					DCAA696E1C1862D6009E2A55 = {
 						CreatedOnToolsVersion = 7.2;
+						DevelopmentTeam = YD52LXT846;
 						LastSwiftMigration = 1000;
 					};
 				};
@@ -167,13 +170,94 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		1D0403895053496EE9A8FB89 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-CameraBackgroundDemo/Pods-CameraBackgroundDemo-resources.sh",
+				"${PODS_ROOT}/SwiftQuality/.swiftformat",
+				"${PODS_ROOT}/SwiftQuality/.swiftlint.yml",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/.swiftformat",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/.swiftlint.yml",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-CameraBackgroundDemo/Pods-CameraBackgroundDemo-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		389496EE9890082B7385F5B5 /* [CP-User] SwiftFormat */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "[CP-User] SwiftFormat";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if [ \"Debug\" == \"${CONFIGURATION}\" ]; then ${PODS_ROOT}/SwiftFormat/CommandLineTool/swiftformat --swiftversion ${SWIFT_VERSION} --config ${PODS_ROOT}/SwiftQuality/.swiftformat ${SRCROOT}/.. ; fi";
+			showEnvVarsInLog = 0;
+		};
+		4F69E1BE0CB3F24634A03797 /* [CP-User] SwiftLint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "[CP-User] SwiftLint";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if [ \"Debug\" == \"${CONFIGURATION}\" ]; then ${PODS_ROOT}/SwiftLint/swiftlint --config ${PODS_ROOT}/SwiftQuality/.swiftlint.yml --path ${SRCROOT}/.. ; fi";
+			showEnvVarsInLog = 0;
+		};
+		88018194F8AC06496816AB76 /* [CP-User] SwiftLintAutocorrect */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "[CP-User] SwiftLintAutocorrect";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if [ \"Debug\" == \"${CONFIGURATION}\" ]; then ${PODS_ROOT}/SwiftLint/swiftlint autocorrect --config ${PODS_ROOT}/SwiftQuality/.swiftlint.yml --path ${SRCROOT}/.. ; fi";
+			showEnvVarsInLog = 0;
+		};
 		886033E7B38F738E8B67EDFF /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-CameraBackgroundDemo/Pods-CameraBackgroundDemo-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-CameraBackgroundDemo/Pods-CameraBackgroundDemo-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/CameraBackground/CameraBackground.framework",
 				"${BUILT_PRODUCTS_DIR}/MiniLayout/MiniLayout.framework",
 				"${BUILT_PRODUCTS_DIR}/MultiToggleButton/MultiToggleButton.framework",
@@ -186,34 +270,8 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CameraBackgroundDemo/Pods-CameraBackgroundDemo-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-CameraBackgroundDemo/Pods-CameraBackgroundDemo-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
-		};
-		DCD5945B20B18046001B6E44 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "if which swiftformat >/dev/null; then\nswiftformat --stripunusedargs unnamed-only \"${SRCROOT}/../Sources\"\nswiftformat --stripunusedargs unnamed-only \"${SRCROOT}\"\nfi";
-		};
-		DCD5945C20B18056001B6E44 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "if which swiftlint >/dev/null; then\nswiftlint lint --config \"${SRCROOT}/../Sources/.swiftlint.yml\"\ncd \"${SRCROOT}/../Sources\"\nswiftlint\nfi";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -352,7 +410,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CLANG_ENABLE_MODULES = YES;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = YD52LXT846;
 				INFOPLIST_FILE = CameraBackgroundDemo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.yonatsharon.CameraBackground;
@@ -368,7 +426,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CLANG_ENABLE_MODULES = YES;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = YD52LXT846;
 				INFOPLIST_FILE = CameraBackgroundDemo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.yonatsharon.CameraBackground;

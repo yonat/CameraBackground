@@ -15,7 +15,7 @@ extension UIColor {
 }
 
 public extension UITraitEnvironment {
-    public func bundledCameraImage(_ named: String) -> UIImage? {
+    func bundledCameraImage(_ named: String) -> UIImage? {
         if let image = UIImage(named: named) {
             return image
         }
@@ -26,7 +26,7 @@ public extension UITraitEnvironment {
         return nil
     }
 
-    public func bundledCameraTemplateImage(_ named: String) -> UIImage? {
+    func bundledCameraTemplateImage(_ named: String) -> UIImage? {
         return bundledCameraImage(named)?.withRenderingMode(.alwaysTemplate)
     }
 }
@@ -34,9 +34,9 @@ public extension UITraitEnvironment {
 extension UIDevice {
     class var isSimulator: Bool {
         #if targetEnvironment(simulator)
-            return true
+        return true
         #else
-            return false
+        return false
         #endif
     }
 }

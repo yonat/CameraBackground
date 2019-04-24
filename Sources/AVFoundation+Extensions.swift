@@ -11,7 +11,7 @@ import AVFoundation
 extension AVCaptureSession {
     class func stillCameraCaptureSession(_ position: AVCaptureDevice.Position) -> AVCaptureSession? {
         #if targetEnvironment(simulator)
-            return nil
+        return nil
         #endif
         let session = AVCaptureSession()
         session.sessionPreset = AVCaptureSession.Preset.photo
