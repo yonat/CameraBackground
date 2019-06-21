@@ -19,7 +19,7 @@ class CameraBackgroundViewController: UIViewController {
         shootButton.addTarget(self, action: #selector(shoot), for: .touchUpInside)
         shootButton.tag = 7
 
-        view.layoutMargins = UIEdgeInsets(top: 30, left: 10, bottom: 10, right: 10)
+        view.layoutMargins = UIEdgeInsets(top: 30, left: 10, bottom: 10, right: 10) // swiftlint:disable:this numbers_smell
         view.addConstrainedSubview(shootButton, constrain: .centerX, .bottom)
         view.addCameraBackground(.back, buttonMargins: view.layoutMargins)
     }

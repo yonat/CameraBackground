@@ -39,7 +39,7 @@ class FocusBoxLayer: CAShapeLayer {
 
 extension UIBezierPath {
     convenience init(focusBoxAround center: CGPoint, big: Bool = false) {
-        let size: CGFloat = big ? 150 : 75
+        let size: CGFloat = big ? 150 : 75 // swiftlint:disable:this numbers_smell
         let lineSize: CGFloat = 5
         let square = CGRect(x: center.x - size / 2, y: center.y - size / 2, width: size, height: size)
         self.init(rect: square)
