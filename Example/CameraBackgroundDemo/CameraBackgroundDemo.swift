@@ -7,7 +7,7 @@
 //
 
 import CameraBackground
-import MiniLayout
+import SweeterSwift
 import UIKit
 
 class CameraBackgroundViewController: UIViewController {

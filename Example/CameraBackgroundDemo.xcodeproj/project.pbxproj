@@ -236,14 +236,14 @@
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-CameraBackgroundDemo/Pods-CameraBackgroundDemo-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/CameraBackground/CameraBackground.framework",
-				"${BUILT_PRODUCTS_DIR}/MiniLayout/MiniLayout.framework",
 				"${BUILT_PRODUCTS_DIR}/MultiToggleButton/MultiToggleButton.framework",
+				"${BUILT_PRODUCTS_DIR}/SweeterSwift/SweeterSwift.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CameraBackground.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MiniLayout.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MultiToggleButton.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SweeterSwift.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;

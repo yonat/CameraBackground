@@ -7,8 +7,8 @@
 //
 
 import AVFoundation
-import MiniLayout
 import MultiToggleButton
+import SweeterSwift
 import UIKit
 
 public extension UIView {
@@ -275,12 +275,7 @@ class CameraLayer: AVCaptureVideoPreviewLayer {
     }
 
     private func setup() {
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(updateCameraFrameAndOrientation),
-            name: UIDevice.orientationDidChangeNotification,
-            object: nil
-        )
+        observeNotification(name: UIDevice.orientationDidChangeNotification, selector: #selector(updateCameraFrameAndOrientation))
     }
 
     @objc func updateCameraFrameAndOrientation() {

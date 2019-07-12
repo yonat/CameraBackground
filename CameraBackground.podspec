@@ -53,6 +53,6 @@ view.removeCameraBackground()
     resources.resource_bundle = {s.name => 'Sources/*.png'}
   end
 
-  s.dependency 'MiniLayout'
+  s.dependency 'SweeterSwift'
   s.dependency 'MultiToggleButton'
 end

@@ -1,6 +1,5 @@
 use_frameworks!
 pod 'CameraBackground', :path => '..'
-pod 'MiniLayout'
 pod 'SwiftQuality', :git => 'https://github.com/yonat/SwiftQuality'
 
 target 'CameraBackgroundDemo' do
