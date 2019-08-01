@@ -129,6 +129,11 @@ public extension UIView {
         panel.addArrangedSubview(flashButton)
         updateFlashButtonState()
 
+        for button in panel.arrangedSubviews {
+            button.layer.shadowOpacity = 1
+            button.layer.shadowOffset = .zero
+        }
+
         // focus and zoom gestures - uses gesture subclass to make it identifiable when removing camera
         addGestureRecognizer(CameraPinchGestureRecognizer(target: self, action: #selector(pinchToZoom)))
         addGestureRecognizer(CameraTapGestureRecognizer(target: self, action: #selector(tapToFocus)))
