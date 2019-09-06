@@ -68,9 +68,13 @@ Legacy versions:
 | 3 | `pod 'MiniLayout', '~> 1.1.0'`<br>`pod 'MultiToggleButton', '~> 1.5.2'`<br>`pod 'CameraBackground', '~> 1.2'` |
 | 2.3 | `pod 'MiniLayout', '~> 1.0.1'`<br>`pod 'MultiToggleButton', '~> 1.4.0'`<br>`pod 'CameraBackground', '~> 1.0.2'` |
 
-### Manually:
+### Swift Package Manager:
 
-Copy `Sources/*` to your Xcode project.
+```swift
+dependencies: [
+    .package(url: "https://github.com/yonat/CameraBackground", from: "1.6.5")
+]
+```
 
 ## Meta
 
