@@ -1,13 +1,13 @@
 PODS:
-  - CameraBackground (1.6.2):
-    - CameraBackground/Resources (= 1.6.2)
+  - CameraBackground (1.6.5):
+    - CameraBackground/Resources (= 1.6.5)
     - MultiToggleButton
     - SweeterSwift
-  - CameraBackground/Resources (1.6.2):
+  - CameraBackground/Resources (1.6.5):
     - MultiToggleButton
     - SweeterSwift
   - MultiToggleButton (1.8.1)
-  - SweeterSwift (1.0.0)
+  - SweeterSwift (1.0.5)
   - SwiftFormat/CLI (0.40.9)
   - SwiftLint (0.33.0)
   - SwiftQuality (1.0.2):
@@ -16,20 +16,19 @@ PODS:
 
 DEPENDENCIES:
   - CameraBackground (from `..`)
-  - SweeterSwift (from `~/src/github/SweeterSwift`)
   - SwiftQuality (from `https://github.com/yonat/SwiftQuality`)
 
 SPEC REPOS:
-  https://github.com/cocoapods/specs.git:
+  https://github.com/CocoaPods/Specs.git:
     - MultiToggleButton
     - SwiftFormat
     - SwiftLint
+  trunk:
+    - SweeterSwift
 
 EXTERNAL SOURCES:
   CameraBackground:
     :path: ".."
-  SweeterSwift:
-    :path: "~/src/github/SweeterSwift"
   SwiftQuality:
     :git: https://github.com/yonat/SwiftQuality
 
@@ -39,13 +38,13 @@ CHECKOUT OPTIONS:
     :git: https://github.com/yonat/SwiftQuality
 
 SPEC CHECKSUMS:
-  CameraBackground: 72d4707096a0409a4915a2a4bcec8bc61b73a522
+  CameraBackground: 99ae3be267e5fd348e86281ba800fb6ee9862c80
   MultiToggleButton: 05601cbfe9ce0987e56713f8d5e7dff90619c4ea
-  SweeterSwift: 9a8fb372f55c4e378c06ec89729b0725de06a241
+  SweeterSwift: 2708d1eea926546f8f6e8fea38ac8f5598ff00c7
   SwiftFormat: 6b67b6e7fe73d664f0cbb4f13721f130462c86a5
   SwiftLint: fed9c66336e41fc74dc48a73678380718f0c8b0e
   SwiftQuality: 9dddd6752df12ae7ed3b1eed24b6fc42d75724cf
 
-PODFILE CHECKSUM: a9c41d58df8917ece1bce105ba975e404e895ef2
+PODFILE CHECKSUM: 3a5e97b09492887e31c4dd3e8ca14727790f27ec
 
-COCOAPODS: 1.7.2
+COCOAPODS: 1.8.4
