@@ -1,5 +1,5 @@
 //
-//  CoundownLabel.swift
+//  CountdownLabel.swift
 //  CameraBackground
 //
 //  Created by Yonat Sharon on 11/1/15.
@@ -9,7 +9,7 @@
 import UIKit
 
 /// counts down seconds, and then performs an action.
-class CoundownLabel: UILabel {
+class CountdownLabel: UILabel {
     var remainingSeconds: Int = 0
     let action: () -> Void
     private var dispatchWorkItem: DispatchWorkItem?

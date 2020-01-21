@@ -204,7 +204,7 @@ public extension UIView {
 
     private func performWithTimer(_ interval: Int, block: @escaping () -> Void) {
         if interval > 0 {
-            let countdownLabel = CoundownLabel(seconds: interval, action: block)
+            let countdownLabel = CountdownLabel(seconds: interval, action: block)
             countdownLabel.tag = theCountdownLabelTag
             addConstrainedSubview(countdownLabel, constrain: .centerX, .centerY)
         } else {
