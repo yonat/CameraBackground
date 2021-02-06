@@ -53,6 +53,7 @@ public extension UIView {
         if showButtons {
             addCameraControls(margins: buttonMargins, location: buttonsLocation)
         }
+        cameraLayer.updateCameraFrameAndOrientation()
     }
 
     /// Take snapshot of the camera input shown in the background layer.
