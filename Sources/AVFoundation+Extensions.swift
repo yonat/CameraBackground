@@ -17,7 +17,7 @@ extension AVCaptureSession {
         session.sessionPreset = AVCaptureSession.Preset.photo
         session.addCameraInput(position)
         session.addOutput(AVCaptureStillImageOutput())
-        session.startRunning()
+        session.startRunningInBackground()
         return session
     }
 
@@ -36,6 +36,12 @@ extension AVCaptureSession {
             }
         } catch {
             NSLog("Can't access camera")
+        }
+    }
+
+    func startRunningInBackground() {
+        DispatchQueue.global().async { [weak self] in
+            self?.startRunning()
         }
     }
 }

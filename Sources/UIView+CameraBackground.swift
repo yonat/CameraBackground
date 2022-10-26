@@ -76,7 +76,7 @@ public extension UIView {
     /// Re-start streaming input from camera into background layer.
     @objc func freeCameraSnapshot() {
         cameraLayer?.connection?.isEnabled = true // to unfreeze image
-        cameraLayer?.session?.startRunning()
+        cameraLayer?.session?.startRunningInBackground()
         removeFocusBox()
     }
 
