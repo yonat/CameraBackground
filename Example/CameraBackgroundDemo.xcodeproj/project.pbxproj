@@ -97,7 +97,6 @@
 				DCAA696C1C1862D6009E2A55 /* Frameworks */,
 				DCAA696D1C1862D6009E2A55 /* Resources */,
 				886033E7B38F738E8B67EDFF /* [CP] Embed Pods Frameworks */,
-				1D0403895053496EE9A8FB89 /* [CP] Copy Pods Resources */,
 				4F69E1BE0CB3F24634A03797 /* [CP-User] SwiftLint */,
 			);
 			buildRules = (
@@ -173,26 +172,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		1D0403895053496EE9A8FB89 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-CameraBackgroundDemo/Pods-CameraBackgroundDemo-resources.sh",
-				"${PODS_ROOT}/SwiftQuality/.swiftformat",
-				"${PODS_ROOT}/SwiftQuality/.swiftlint.yml",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/.swiftformat",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/.swiftlint.yml",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-CameraBackgroundDemo/Pods-CameraBackgroundDemo-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		389496EE9890082B7385F5B5 /* [CP-User] SwiftFormat */ = {

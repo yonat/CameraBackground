@@ -103,7 +103,7 @@ extension AVCaptureDevice {
 
 extension AVCaptureVideoPreviewLayer {
     func captureStillImage(_ completion: ((_ capturedImage: UIImage?, _ error: NSError?) -> Void)?) {
-        let errorCompletion = { (code: Int, description: String) -> Void in
+        let errorCompletion = { (code: Int, description: String) in
             completion?(nil, NSError(domain: "AVCaptureError", code: code, userInfo: [NSLocalizedDescriptionKey: description]))
             return
         }
@@ -115,7 +115,7 @@ extension AVCaptureVideoPreviewLayer {
                         completion?(nil, error as NSError?)
                     } else if let imageBuffer = imageBuffer {
                         if let imageData = AVCaptureStillImageOutput.jpegStillImageNSDataRepresentation(imageBuffer),
-                            var image = UIImage(data: imageData) {
+                           var image = UIImage(data: imageData) {
                             if (self.session?.inputs.first as? AVCaptureDeviceInput)?.device.position == .front { // flip front camera
                                 // swiftlint:disable force_unwrapping
                                 image = UIImage(cgImage: image.cgImage!, scale: image.scale, orientation: .rightMirrored)

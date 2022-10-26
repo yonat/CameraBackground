@@ -26,14 +26,15 @@ class CameraBackgroundViewController: UIViewController {
 
     @objc func shoot() {
         view.takeCameraSnapshot({
-            // animate snapshot capture
-            self.view.alpha = 0
-            UIView.animate(withDuration: 1) { self.view.alpha = 1 }
-        },
-                                completion: { capturedImage, error in
-            self.view.freeCameraSnapshot() // unfreeze image
-            _ = (capturedImage, error) // ... handle capturedImage and error
-        })
+                // animate snapshot capture
+                self.view.alpha = 0
+                UIView.animate(withDuration: 1) { self.view.alpha = 1 }
+            },
+            completion: { capturedImage, error in
+                self.view.freeCameraSnapshot() // unfreeze image
+                _ = (capturedImage, error) // ... handle capturedImage and error
+            }
+        )
     }
 }
 
