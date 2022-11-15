@@ -7,6 +7,7 @@
 //
 
 import AVFoundation
+import UIKit
 
 extension AVCaptureSession {
     class func stillCameraCaptureSession(_ position: AVCaptureDevice.Position) -> AVCaptureSession? {

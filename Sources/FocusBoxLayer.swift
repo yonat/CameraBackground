@@ -6,6 +6,8 @@
 //  Copyright (c) 2015 Yonat Sharon. All rights reserved.
 //
 
+import UIKit
+
 /// shows a focus box, similar to the built-in camera.
 class FocusBoxLayer: CAShapeLayer {
     convenience init(center: CGPoint) {

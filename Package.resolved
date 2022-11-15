@@ -1,0 +1,25 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "MultiToggleButton",
+        "repositoryURL": "https://github.com/yonat/MultiToggleButton",
+        "state": {
+          "branch": null,
+          "revision": "13f054a1ae873078b40a67e4013f9498ffb2d128",
+          "version": "1.8.2"
+        }
+      },
+      {
+        "package": "SweeterSwift",
+        "repositoryURL": "https://github.com/yonat/SweeterSwift",
+        "state": {
+          "branch": null,
+          "revision": "74b3d19dc80158b2a87240d05894154a1ba7f2ef",
+          "version": "1.2.1"
+        }
+      }
+    ]
+  },
+  "version": 1
+}
