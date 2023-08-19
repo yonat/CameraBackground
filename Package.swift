@@ -5,7 +5,7 @@ import PackageDescription
 let package = Package(
     name: "CameraBackground",
     platforms: [
-        .iOS(.v9),
+        .iOS(.v11),
     ],
     products: [
         .library(name: "CameraBackground", targets: ["CameraBackground"]),
@@ -15,7 +15,7 @@ let package = Package(
         .package(url: "https://github.com/yonat/MultiToggleButton", from: "1.8.2"),
     ],
     targets: [
-        .target(name: "CameraBackground", dependencies: ["SweeterSwift", "MultiToggleButton"], path: "Sources"),
+        .target(name: "CameraBackground", dependencies: ["SweeterSwift", "MultiToggleButton"], path: "Sources", resources: [.copy("PrivacyInfo.xcprivacy")]),
     ],
     swiftLanguageVersions: [.v5]
 )
