@@ -72,7 +72,7 @@ Legacy versions:
 
 ```swift
 dependencies: [
-    .package(url: "https://github.com/yonat/CameraBackground", from: "1.6.6")
+    .package(url: "https://github.com/yonat/CameraBackground", from: "1.6.8")
 ]
 ```
 
