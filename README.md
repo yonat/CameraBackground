@@ -60,19 +60,11 @@ view.addCameraBackground(
 pod 'CameraBackground'
 ```
 
-Legacy versions:
-
-| Swift version | CameraBackground version |
-| :---: | :--- |
-| 4.0 (Xcode 9.4) | `pod 'MiniLayout', '~> 1.2.1'`<br>`pod 'MultiToggleButton', '~> 1.7.1'`<br>`pod 'CameraBackground', '~> 1.4.1'` |
-| 3 | `pod 'MiniLayout', '~> 1.1.0'`<br>`pod 'MultiToggleButton', '~> 1.5.2'`<br>`pod 'CameraBackground', '~> 1.2'` |
-| 2.3 | `pod 'MiniLayout', '~> 1.0.1'`<br>`pod 'MultiToggleButton', '~> 1.4.0'`<br>`pod 'CameraBackground', '~> 1.0.2'` |
-
 ### Swift Package Manager:
 
 ```swift
 dependencies: [
-    .package(url: "https://github.com/yonat/CameraBackground", from: "1.7.1")
+    .package(url: "https://github.com/yonat/CameraBackground", from: "1.7.2")
 ]
 ```
 
