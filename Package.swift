@@ -1,4 +1,4 @@
-// swift-tools-version:5.3
+// swift-tools-version:5.6
 
 import PackageDescription
 
@@ -15,7 +15,7 @@ let package = Package(
         .package(url: "https://github.com/yonat/MultiToggleButton", from: "1.8.2"),
     ],
     targets: [
-        .target(name: "CameraBackground", dependencies: ["SweeterSwift", "MultiToggleButton"], path: "Sources", resources: [.copy("PrivacyInfo.xcprivacy")]),
+        .target(name: "CameraBackground", dependencies: ["SweeterSwift", "MultiToggleButton"], path: "Sources", resources: [.process("PrivacyInfo.xcprivacy")]),
     ],
     swiftLanguageVersions: [.v5]
 )
