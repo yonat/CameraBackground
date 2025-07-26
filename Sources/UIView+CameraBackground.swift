@@ -281,16 +281,24 @@ class CameraLayer: AVCaptureVideoPreviewLayer {
     }
 
     private func setup() {
+        UIDevice.current.beginGeneratingDeviceOrientationNotifications()
         observeNotification(name: UIDevice.orientationDidChangeNotification, selector: #selector(updateCameraFrameAndOrientation))
     }
 
     @objc func updateCameraFrameAndOrientation() {
-        guard let superlayer = superlayer else { return }
-        frame = superlayer.bounds
-        guard let connection = connection, connection.isVideoOrientationSupported,
-              let appOrientation = AVCaptureVideoOrientation(rawValue: UIApplication.shared.statusBarOrientation.rawValue)
+        DispatchQueue.main.asyncAfter(deadline: .now() + CATransaction.animationDuration()) { [weak self] in
+            guard let self, let superlayer else { return }
+            frame = superlayer.bounds
+        }
+
+        let angle = UIDevice.current.orientation.angle
+        guard let connection = connection, connection.isVideoRotationAngleSupported(angle)
         else { return }
-        connection.videoOrientation = appOrientation
+        if #available(iOS 17.0, *) {
+            connection.videoRotationAngle = angle
+        } else {
+            connection.videoOrientation = UIDevice.current.orientation.videoOrientation
+        }
     }
 }
 

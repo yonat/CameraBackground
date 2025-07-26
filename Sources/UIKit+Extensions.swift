@@ -6,6 +6,7 @@
 //  Copyright (c) 2015 Yonat Sharon. All rights reserved.
 //
 
+import AVFoundation
 import UIKit
 
 extension UIColor {
@@ -85,6 +86,38 @@ extension UIStackView {
         if alignment != .fill {
             axis = .vertical
             spacing = 24
+        }
+    }
+}
+
+extension UIDeviceOrientation {
+    var angle: CGFloat {
+        switch self {
+        case .portrait:
+            return 90
+        case .landscapeLeft:
+            return 0
+        case .portraitUpsideDown:
+            return -90
+        case .landscapeRight:
+            return 180
+        default:
+            return 0
+        }
+    }
+
+    var videoOrientation: AVCaptureVideoOrientation {
+        switch self {
+        case .portrait:
+            return .portrait
+        case .landscapeLeft:
+            return .landscapeRight
+        case .portraitUpsideDown:
+            return .portraitUpsideDown
+        case .landscapeRight:
+            return .landscapeLeft
+        default:
+            return .portrait
         }
     }
 }
