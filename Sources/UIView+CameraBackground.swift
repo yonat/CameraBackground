@@ -33,6 +33,11 @@ public extension UIView {
         removeCameraControls()
         cameraLayer?.removeFromSuperlayer()
     }
+    
+    // After iOS 17 this function needs to be called from the CameraView in viewWillTransition in order to update the UI when switching from landscapte to portrait
+    func updateCameraFrameAndOrientation(){
+        (self.cameraLayer as! CameraLayer).updateCameraFrameAndOrientation();
+    }
 
     /// Add camera background layer
     @objc func addCameraBackground(
